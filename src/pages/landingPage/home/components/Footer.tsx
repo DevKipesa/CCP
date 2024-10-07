@@ -5,7 +5,7 @@ const Footer: React.FC = () => {
   return (
     <Box as="footer" pb="4">
       <Flex direction="column" align="center">
-        <Text fontSize="sm">© 2024 Cre8ify. All rights reserved.</Text>
+        <Text fontSize="sm">© 2024 CCP. All rights reserved.</Text>
       </Flex>
     </Box>
   );

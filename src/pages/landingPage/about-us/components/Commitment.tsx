@@ -23,16 +23,11 @@ const Commitment = () => {
             Our Commitment
           </Heading>
           <Text mb={"1rem"} color={"#b7b5c8"}>
-            At Cre8ify, we are committed to fostering trust, creativity,
-            diversity, and collaboration in the digital content space. We strive
-            to create an inclusive and supportive environment where all voices
-            are heard, all ideas are valued, and all creators have the
-            opportunity to thrive.
+          At CCP, we champion trust, creativity, and collaboration in digital content. Our goal is to build an inclusive space where every voice is valued, and creators can thrive. Join us in reshaping the future of content creation and fostering a more connected, innovative community.
             <br />
             <br />
             Join us on our journey to reshape the future of content creation.
-            Together, we can unlock new possibilities, inspire innovation, and
-            build a more connected and empowered digital community.
+            
           </Text>
           <ConnectButton />
         </Box>

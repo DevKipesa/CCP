@@ -30,12 +30,7 @@ const Mission = () => {
             Our Mission
           </Heading>
           <Text color={"#b7b5c8"}>
-            Our mission at Cre8ify is to revolutionize the way content is
-            created, shared, and consumed in the digital era. We envision a
-            world where creators have full ownership and control over their
-            work, where audiences can discover and support their favorite
-            creators directly, and where the content ecosystem is decentralized,
-            transparent, and inclusive.
+          At CCP, our mission is to transform content creation by giving creators full ownership and control. We empower audiences to directly support creators in a decentralized, transparent, and inclusive ecosystem.
           </Text>
         </Box>
       </Flex>

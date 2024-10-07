@@ -39,7 +39,7 @@ const Offer = () => {
         mb="40px"
         color={"#e9ecef"}
       >
-        What We Offer
+        Our Offer
       </Heading>
 
       <Flex
@@ -82,9 +82,9 @@ const Offer = () => {
               <ModalContent bg={"#1d1a27"} className="font">
                 <ModalCloseButton
                   _focus={{ outline: "none" }}
-                  _hover={{ border: "1px solid #9f51c6" }}
+                  _hover={{  }}
                 />
-                <ModalHeader color={"#e9ecef"}>{descId.name}</ModalHeader>
+                <ModalHeader>{descId.name}</ModalHeader>
                 <ModalBody>
                   <Text mb={"1rem"} color={"#b7b5c8"}>
                     {descId.desc}

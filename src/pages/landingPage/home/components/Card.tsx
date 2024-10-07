@@ -37,7 +37,10 @@ const Card: React.FC<CardProps> = ({ image }) => {
       onMouseLeave={handleMouseLeave}
       style={{
         transform: `rotateX(${tilt.tiltY}deg) rotateY(${tilt.tiltX}deg)`,
-        transition: "transform 0.2s",
+        transition: "transform 0.2s ease, scale 0.2s ease",
+      }}
+      _hover={{
+        transform: `scale(1.05) rotateX(${tilt.tiltY}deg) rotateY(${tilt.tiltX}deg)`,
       }}
     >
       <Image src={image} alt="" objectFit="cover" w="100%" h="100%" />
@@ -47,9 +50,9 @@ const Card: React.FC<CardProps> = ({ image }) => {
 
 const CardRow: React.FC = () => {
   // Replace these with the paths to your images
-  const image1 = "./assets/image1.jpg";
-  const image2 = "./assets/image2.jpg";
-  const image3 = "./assets/image3.jpg";
+  const image1 = "./assets/image1.jpeg";
+  const image2 = "./assets/image2.webp";
+  const image3 = "./assets/image3.jpeg";
   const image4 = "./assets/image4.jpg";
 
   return (
@@ -65,7 +68,6 @@ const CardRow: React.FC = () => {
         position={"absolute"}
         bottom={"0"}
         right={"0"}
-        bgGradient="linear(to-t, #e94c91, #5555fb)"
         w={"100px"}
         h={"100px"}
         zIndex={"-10"}
@@ -75,7 +77,6 @@ const CardRow: React.FC = () => {
         position={"absolute"}
         bottom={"-5rem"}
         left={"0"}
-        bgGradient="linear(to-t, #e94c91, #5555fb)"
         w={"100px"}
         h={"100px"}
         zIndex={"-10"}

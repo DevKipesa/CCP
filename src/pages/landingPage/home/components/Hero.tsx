@@ -22,7 +22,7 @@ export default function Hero() {
           position={"absolute"}
           top={"2rem"}
           right={"-2rem"}
-          bgGradient="linear(to-r, #e94c91, #5555fb)"
+          // bgGradient="linear(to-r, #e94c91, #5555fb)"
           w={"200px"}
           h={"200px"}
           zIndex={"-10"}
@@ -34,17 +34,12 @@ export default function Hero() {
             as="h1"
             size={["xl", "xl", "2xl", "2xl"]}
             mb="30px"
-            color={"#e9ecef"}
+            // color={"#e9ecef"}
           >
-            Unleash Your Creativity with Full Control
+            Unleash Your Creativity AND Earn.
           </Heading>
           <Text color={"#b7b5c8"}>
-            Cre8ify is a Web3 platform built for creators to monetize their
-            content and secure their digital rights. Step into the future of
-            content creation. Our platform leverages blockchain to ensure that
-            you have full ownership of your content, transparent monetization
-            options, and a direct connection with your audience. Start creating,
-            earning, and thriving today.
+          CCP is a Web3 platform designed for creators to monetize their content and protect their digital rights. Embrace the future of content creation with our blockchain-powered solution, giving you complete ownership of your work, transparent earning opportunities, and direct engagement with your audience. Start creating, earning, and thriving today.
           </Text>
         </Box>
         <Box
@@ -84,7 +79,7 @@ export default function Hero() {
           position={"absolute"}
           top={"70%"}
           left={"20%"}
-          bgGradient="linear(to-t, #e94c91, #5555fb)"
+          // bgGradient="linear(to-t, #e94c91, #5555fb)"
           w={"300px"}
           h={"300px"}
           zIndex={"-10"}
@@ -114,13 +109,10 @@ export default function Hero() {
             noOfLines={2}
             mb={6}
           >
-            Why Choose Us
+            Why We are the Best
           </Heading>
           <Text color={"#b7b5c8"}>
-            We are a Decentralised Content Creator platform where creatives get
-            paid for their work without the presence of a middle man. Feel free
-            to speak your mind without restrictions and regulations. Your voice
-            is heard!
+            Don't wait for large number of followers to start earning. START TODAY and earn from your content. GET STARTED.
           </Text>
         </Box>
       </Flex>

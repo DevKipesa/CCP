@@ -172,7 +172,7 @@ export const contact = [
   {
     icon: GrMail,
     text: "Email",
-    url: "mailto:adedayovicky123@gmail.com",
+    url: "kymdommie@gmail.com",
   },
   {
     icon: IoLogoWhatsapp,

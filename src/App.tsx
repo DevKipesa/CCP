@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/landingPage/home";
 import Feed from "./pages/dashboard/feed";
-import Subscription from "./pages/dashboard/subscription";
+// import Subscription from "./pages/dashboard/subscription";
 import Analytics from "./pages/dashboard/analytics";
 import Overview from "./pages/DAOdashboard/Overview";
 import Proposals from "./pages/DAOdashboard/Proposals";
@@ -26,7 +26,7 @@ function App() {
           <Route path="/support" element={<Support />} />
           <Route path="/feed" element={<Feed />} />
           <Route path="/analytics" element={<Analytics />} />
-          <Route path="/subscription" element={<Subscription />} />
+          {/* <Route path="/subscription" element={<Subscription />} /> */}
           <Route path="/overview" element={<Overview />} />
           <Route path="/proposals" element={<Proposals />} />
           <Route path="/voting" element={<Voting />} />

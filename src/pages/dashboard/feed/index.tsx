@@ -33,9 +33,9 @@ const Feed = () => {
             _focus={{ outline: "none" }}
             borderRadius={"0"}
           >
-            Free
+           Content
           </Tab>
-          <Tab
+          {/* <Tab
             _selected={{
               bgGradient: "linear(to-r, #fff, #fff)",
               bgClip: "text",
@@ -49,7 +49,7 @@ const Feed = () => {
             borderRadius={"0"}
           >
             Exclusive
-          </Tab>
+          </Tab> */}
           <Tab
             _selected={{
               bgGradient: "linear(to-r, #fff, #fff)",

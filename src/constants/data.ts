@@ -16,11 +16,11 @@ export const menu = [
     title: "Analytics",
     icon: SiGoogleanalytics,
   },
-  {
-    link: "/subscription",
-    title: "Subscription",
-    icon: FaMoneyBillTrendUp,
-  },
+  // {
+  //   link: "/subscription",
+  //   title: "Subscription",
+  //   icon: FaMoneyBillTrendUp,
+  // },
 ];
 
 export const menuDAO = [

@@ -78,7 +78,7 @@ const CreateInput = () => {
       formData.append("pinataOptions", options);
 
       const res = await fetch(
-        "https://api.pinata.cloud/pinning/pinFileToIPFS",
+        "",
         {
           method: "POST",
           headers: {
@@ -117,7 +117,7 @@ const CreateInput = () => {
   return (
     <Box mb={"3rem"}>
       <Text fontSize={"2rem"} fontWeight={"600"} mb={"1rem"} color={"#e9ecef"}>
-        What will you create today, {userDetails?.username || "Username"}?
+        What will you create today {userDetails?.username || ""}?
       </Text>
       <Box
         w={["100%", "100%", "550px", "550px"]}
@@ -135,7 +135,7 @@ const CreateInput = () => {
           onOpen();
         }}
       >
-        What's on your mind?
+        Upload Content
       </Box>
       <Modal isCentered isOpen={isOpen} onClose={onClose} size={"xl"}>
         {overlay}
@@ -145,7 +145,7 @@ const CreateInput = () => {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Text>
+            {/* <Text>
               {exclusive ? "Create Exclusive Content" : "Create Free Content"}
             </Text>
             <Button
@@ -158,11 +158,11 @@ const CreateInput = () => {
               <Text bgGradient="linear(to-r, #e94c91, #5555fb)" bgClip={"text"}>
                 {exclusive ? "Switch to Free" : "Switch to Exclusive"}
               </Text>
-            </Button>
+            </Button> */}
           </ModalHeader>
           <ModalCloseButton
             _focus={{ outline: "none" }}
-            _hover={{ border: "1px solid #9f51c6" }}
+            _hover={{ border: "1px solid #3A8DFF" }}
           />
           <ModalBody pb={"1.7rem"}>
             {exclusive ? (
@@ -174,7 +174,7 @@ const CreateInput = () => {
                 transition={"all 1s"}
               >
                 <Textarea
-                  placeholder="What's on your mind?"
+                  placeholder="About content"
                   value={title}
                   resize={"none"}
                   border={"none"}
@@ -300,13 +300,12 @@ const CreateInput = () => {
                     </Flex>
                   </Flex>
                   <Button
-                    bgGradient="linear(to-r, #e94c91, #5555fb)"
+                    bgGradient="linear(to-r, #fff, #fff)"
                     border={"none"}
-                    color={"#fff"}
                     transition={"all .5s ease-in-out"}
                     w={["100%", "100%", "150px", "150px"]}
                     _hover={{
-                      bgGradient: "linear(to-r, #e94c91, #5555fb)",
+                      bgGradient: "linear(to-r, #3A8DFF, #3A8DFF)",
                       border: "none",
                     }}
                     _focus={{ outline: "none" }}
@@ -314,7 +313,7 @@ const CreateInput = () => {
                       handleCreateExclusiveContent();
                     }}
                   >
-                    <Text>Create</Text>
+                    <Text>Upload</Text>
                   </Button>
                 </Flex>
               </Box>
@@ -327,7 +326,7 @@ const CreateInput = () => {
                 transition={"all 1s"}
               >
                 <Textarea
-                  placeholder="What's on your mind?"
+                  placeholder="About Content"
                   value={title}
                   resize={"none"}
                   border={"none"}
@@ -453,13 +452,12 @@ const CreateInput = () => {
                     </Flex>
                   </Flex>
                   <Button
-                    bgGradient="linear(to-r, #e94c91, #5555fb)"
+                    bgGradient="linear(to-r, #fff, #fff)"
                     border={"none"}
-                    color={"#fff"}
                     transition={"all .5s ease-in-out"}
                     w={["100%", "100%", "150px", "150px"]}
                     _hover={{
-                      bgGradient: "linear(to-r, #e94c91, #5555fb)",
+                      bgGradient: "linear(to-r, #3A8DFF, #3A8DFF)",
                       border: "none",
                     }}
                     _focus={{ outline: "none" }}
@@ -467,7 +465,7 @@ const CreateInput = () => {
                       handleCreateFreeContent();
                     }}
                   >
-                    <Text>Create</Text>
+                    <Text>Upload</Text>
                   </Button>
                 </Flex>
               </Box>

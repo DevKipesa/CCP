@@ -22,11 +22,11 @@ const Feed = () => {
         >
           <Tab
             _selected={{
-              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+              bgGradient: "linear(to-r, #fff, #fff)",
               bgClip: "text",
             }}
             _hover={{
-              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+              bgGradient: "linear(to-r, #3A8DFF, #3A8DFF)",
               bgClip: "text",
             }}
             border={"none"}
@@ -37,11 +37,11 @@ const Feed = () => {
           </Tab>
           <Tab
             _selected={{
-              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+              bgGradient: "linear(to-r, #fff, #fff)",
               bgClip: "text",
             }}
             _hover={{
-              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+              bgGradient: "linear(to-r, #3A8DFF, #3A8DFF)",
               bgClip: "text",
             }}
             border={"none"}
@@ -52,11 +52,11 @@ const Feed = () => {
           </Tab>
           <Tab
             _selected={{
-              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+              bgGradient: "linear(to-r, #fff, #fff)",
               bgClip: "text",
             }}
             _hover={{
-              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+              bgGradient: "linear(to-r, #3A8DFF, #3A8DFF)",
               bgClip: "text",
             }}
             border={"none"}
@@ -67,11 +67,11 @@ const Feed = () => {
           </Tab>
           <Tab
             _selected={{
-              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+              bgGradient: "linear(to-r, #fff, #fff)",
               bgClip: "text",
             }}
             _hover={{
-              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+              bgGradient: "linear(to-r, #3A8DFF, #3A8DFF)",
               bgClip: "text",
             }}
             border={"none"}

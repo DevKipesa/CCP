@@ -44,7 +44,7 @@ export default function HomeLayout(props: any) {
           bgGradient="linear(to-r, #fff, #fff)"
           bgClip={"text"}
         >
-          CC Platform
+          CCP Platform
         </Text>
         <Flex gap={"2rem"} display={["none", "none", "flex"]}>
           <NavLink className={"activeClassName c_p"} to={"/"}>

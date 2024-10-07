@@ -35,7 +35,7 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
         h="100vh"
         py={"2rem"}
         px={"1.8rem"}
-        bg={"#1d1a27"}
+        bg={"#222222"}
         overflowY={"auto"}
         overflowX={"hidden"}
         css={{
@@ -61,14 +61,10 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
             className="fontOne"
             fontSize={"1.5rem"}
             fontWeight={"500"}
-            bgGradient="linear(to-r, #e94c91, #5555fb)"
+            bgGradient="linear(to-r, #fff, #fff)"
             bgClip={"text"}
           >
-            cre
-            <Text as={"span"} fontSize={"1.8rem"} color={"#e9ecef"}>
-              8
-            </Text>
-            ify
+             CCP Platform
           </Text>
           <ConnectButton />
         </Box>

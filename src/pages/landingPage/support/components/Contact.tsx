@@ -27,7 +27,7 @@ const Contact = () => {
             mb="30px"
             color={"#e9ecef"}
           >
-            Need help with anything on Cre8ify?
+            Need help with anything on CCP?
           </Heading>
           <Flex
             mb={"1rem"}
@@ -46,7 +46,7 @@ const Contact = () => {
                 href={item.url}
                 key={index}
                 fontSize={"1.1rem"}
-                border={"1px solid #9f51c6"}
+                // border={"1px solid #9f51c6"}
                 borderRadius={"1rem"}
                 _hover={{ color: "#b7b5c8" }}
               >

@@ -21,12 +21,11 @@ const Hero = () => {
             We're Here to Help
           </Heading>
           <Text mb={"1rem"} color={"#b7b5c8"}>
-            Welcome to the Cre8ify Support Center. Whether you're a creator
+            Welcome to the CCP Support Center. Whether you're a creator
             looking for guidance, a user with a question, or anyone needing
             assistance, you've come to the right place. Our dedicated support
             team is here to ensure your experience on our platform is smooth and
-            enjoyable. Explore our resources, reach out for help, and find the
-            answers you need to get the most out of Cre8ify.
+            enjoyable.
           </Text>
         </Box>
         <Box w={"100%"} display={"flex"} justifyContent={"center"}>

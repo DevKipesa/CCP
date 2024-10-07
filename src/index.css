@@ -27,7 +27,7 @@
 
 .active {
   background-color: #13111a;
-  box-shadow: 0px 0px 0px 1px #9f51c6;
+  box-shadow: 0px 0px 0px 1px #3A8DFF;
   border-radius: 0.5rem;
   color: white !important;
 }
@@ -35,7 +35,7 @@
 .activeClassName:hover {
   color: white !important;
   background-color: #13111a;
-  box-shadow: 0px 0px 0px 1px #9f51c6;
+  box-shadow: 0px 0px 0px 1px #3A8DFF;
   border-radius: 0.5rem;
 }
 

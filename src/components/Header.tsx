@@ -28,11 +28,7 @@ export default function Header() {
         fontWeight={"500"}
         color={"#04A67D"}
       >
-        cre
-        <Text as={"span"} fontSize={"1.8rem"} color={"#fff"}>
-          8
-        </Text>
-        ify
+        CC Platform
       </Text>
       <ConnectButton />
     </Flex>

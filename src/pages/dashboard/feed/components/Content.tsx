@@ -224,7 +224,7 @@ const Content = ({
               />
               <Button
                 bgGradient="linear(to-r, #3A8DFF, #3A8DFF)"
-                color="#fff"
+                color="#000"
                 onClick={handleMint}
               >
                 Mint Content

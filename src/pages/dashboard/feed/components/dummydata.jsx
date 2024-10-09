@@ -2,7 +2,7 @@ const dummyData = [
     {
       id: 1,
       creatorProfile: "John Patrick",
-      creatorImage: "https://via.placeholder.com/50",
+      creatorImage: "pro.jpg",
       dateCreated: Math.floor(Date.now() / 1000) - 86400, // 1 day ago
       title: "Sample Image Content",
       contentType: "image",
@@ -13,7 +13,7 @@ const dummyData = [
     {
       id: 2,
       creatorProfile: "Jane Smith",
-      creatorImage: "https://via.placeholder.com/50",
+      creatorImage: "pro.jpg",
       dateCreated: Math.floor(Date.now() / 1000) - 172800, // 2 days ago
       title: "Sample Video Content",
       contentType: "video",
@@ -24,7 +24,7 @@ const dummyData = [
     {
       id: 3,
       creatorProfile: "Mike Johnson",
-      creatorImage: "https://via.placeholder.com/50",
+      creatorImage: "pro.jpg",
       dateCreated: Math.floor(Date.now() / 1000) - 604800, // 1 week ago
       title: "Sample Audio Content",
       contentType: "audio",

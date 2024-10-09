@@ -21,7 +21,44 @@ import { useEffect, useState } from "react";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import { HiDotsHorizontal } from "react-icons/hi";
 
-const Content = ({
+// Define ContentItem interface
+// interface ContentItem {
+//   id: number;
+//   item:string;
+//   title: string;
+//   description: string;
+//   creatorProfile: string;
+//   creatorImage: string;
+//   dateCreated: string; // Assuming it's a string
+//   contentType: "image" | "video" | "audio"; // You can expand this as necessary
+//   ipfsHash: string; // The hash for the content
+//   likes: number;
+//   dislikes: number;
+// }
+interface ContentItem {
+  title: string;
+  description: string; // Add this line
+  creatorProfile: string;
+  creatorImage: string; // Ensure this is included
+  dateCreated: string; // Ensure the type matches (string)
+  contentType: "image" | "video" | "audio"; // This should match the type in Content
+  ipfsHash: string; // The hash for the content
+  likes: number;
+  dislikes: number;
+  item:string;
+  id?: ContentItem;
+}
+
+
+interface ContentProps {
+  item: ContentItem;
+  handleFullContent: (item: ContentItem) => void;
+  handleLike: (id: number) => void;
+  handleDisLike: (id: number) => void;
+  handleDelete: (id: number) => void;
+}
+
+const Content: React.FC<ContentProps> = ({
   item,
   handleFullContent,
   handleLike,
@@ -30,16 +67,16 @@ const Content = ({
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [timestamp, setTimestamp] = useState(item.dateCreated);
-  const [timeAgo, setTimeAgo] = useState(null);
+  const [timeAgo, setTimeAgo] = useState<string | null>(null);
   const [isMintModalOpen, setIsMintModalOpen] = useState(false);
-  const [ethAmount, setEthAmount] = useState(""); // State for ETH amount
-  const [isMinted, setIsMinted] = useState(false); // Track if content is minted
+  const [ethAmount, setEthAmount] = useState("");
+  const [isMinted, setIsMinted] = useState(false);
 
   useEffect(() => {
-    const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
-    const elapsedTime = currentTime - Number(timestamp); // Elapsed time in seconds
+    const currentTime = Math.floor(Date.now() / 1000);
+    const elapsedTime = currentTime - Number(timestamp);
 
-    const getTimeAgo = (elapsedTime) => {
+    const getTimeAgo = (elapsedTime: number) => {
       const minute = 60;
       const hour = 60 * minute;
       const day = 24 * hour;
@@ -71,15 +108,12 @@ const Content = ({
     };
 
     setTimeAgo(getTimeAgo(elapsedTime));
-    setTimestamp((prevTime) => prevTime);
+    setTimestamp((prevTime: string) => prevTime);
   }, [timestamp]);
 
   const handleMint = () => {
     if (ethAmount) {
-      // Simulate minting process
       console.log(`Minting content with id: ${item.id}, ETH amount: ${ethAmount}`);
-
-      // Close the modal and mark content as minted
       setIsMinted(true);
       setIsMintModalOpen(false);
     }
@@ -97,7 +131,7 @@ const Content = ({
         <Flex align={"center"} justify={"space-between"}>
           <Flex align={"center"} gap={".5rem"} mb={"1rem"}>
             <Img
-              src={item.creatorImage} // Using local or placeholder image
+              src={item.creatorImage}
               w={["40px", "40px", "50px", "50px"]}
               h={["40px", "40px", "50px", "50px"]}
               objectFit={"cover"}
@@ -157,7 +191,7 @@ const Content = ({
           {item.contentType === "image" && (
             <Img
               mb={"1rem"}
-              src={item.ipfsHash} // Local dummy image URL
+              src={item.ipfsHash}
               alt="Content Image"
               h={"200px"}
               w={"100%"}
@@ -199,67 +233,45 @@ const Content = ({
           <Button
             borderRadius={"50rem"}
             px={"1rem"}
-            bgGradient="linear(to-r, #3A8DFF, #3A8DFF)"
-            border={"none"}
-            color={"#000"}
-            transition={"all .5s ease-in-out"}
-            _focus={{ outline: "none" }}
+            bgGradient="linear(to-l, #3A8DFF, #30c0d9)"
+            color={"white"}
+            variant={"solid"}
             onClick={() => setIsMintModalOpen(true)}
+            _hover={{ background: "none", transform: "translateY(-3px)" }}
           >
             Mint
           </Button>
         </Flex>
 
-        {/* Modal for Minting */}
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalBody>
+              <Text fontSize={"lg"}>{item.title}</Text>
+              <Text>{item.description}</Text>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+
+        {/* Minting Modal */}
         <Modal isOpen={isMintModalOpen} onClose={() => setIsMintModalOpen(false)}>
-          <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
-          <ModalContent bg={"#1d1a27"}>
-            <ModalBody p={6}>
-              <Text mb={4}>Enter ETH Amount to Mint:</Text>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalBody>
+              <Text fontSize={"lg"}>Mint this content</Text>
               <Input
-                placeholder=" 0.000409 ETH"
+                placeholder="Enter ETH amount"
                 value={ethAmount}
                 onChange={(e) => setEthAmount(e.target.value)}
                 mb={4}
               />
               <Button
-                bgGradient="linear(to-r, #3A8DFF, #3A8DFF)"
-                color="#000"
+                colorScheme="teal"
                 onClick={handleMint}
+                disabled={!ethAmount}
               >
-                Mint Content
+                Confirm Mint
               </Button>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-
-        {/* Modal for Full Content */}
-        <Modal isCentered isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
-          <ModalContent mb={6} mt={20} bg={"#1d1a27"}>
-            <ModalBody>
-              <Text mb={".5rem"}>{item.title}</Text>
-              {item.contentType === "image" && (
-                <Img
-                  mb={"1rem"}
-                  src={item.ipfsHash}
-                  alt="Content Image"
-                  objectFit={"cover"}
-                  cursor={"pointer"}
-                  borderRadius={".5rem"}
-                />
-              )}
-              {item.contentType === "video" && (
-                <video width="750" height="500" controls>
-                  <source src={item.ipfsHash} />
-                </video>
-              )}
-              {item.contentType === "audio" && (
-                <audio controls>
-                  <source src={item.ipfsHash} />
-                  Your browser does not support the audio element.
-                </audio>
-              )}
             </ModalBody>
           </ModalContent>
         </Modal>

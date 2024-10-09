@@ -7,21 +7,17 @@ import useDisLike from "../../../../hooks/useDisLike";
 import useDelete from "../../../../hooks/useDelete";
 
 interface ContentItem {
-  title: string;
   id: number;
-  dateCreated: number;
+  title: string;
+  item:string;
+  description: string; // Ensure this matches the Content component's expected structure
   creatorProfile: string;
-  ipfsHash: string;
-  creator: string;
-  isDeleted: boolean;
-  isMonetized: boolean;
-  views: number;
+  creatorImage: string; // Ensure this is included
+  dateCreated: string; // This should be a string based on your Content component
+  contentType: "image" | "video" | "audio"; // Match the type
+  ipfsHash: string; // The hash for the content
   likes: number;
   dislikes: number;
-  shares: number;
-  rating: number;
-  contentType: string;
-  creatorImage: string;
 }
 
 const FreeContentMap = () => {
@@ -30,9 +26,7 @@ const FreeContentMap = () => {
   const [id, setId] = useState<ContentItem | undefined>(
     (fullContent as ContentItem[])[0]
   );
-  const [contentId, setContentId] = useState(Number(""));
-  // console.log(contentId);
-  // console.log(contentItems);
+  const [contentId, setContentId] = useState<number | undefined>(undefined);
 
   const like = useLike();
   const disLike = useDisLike();
@@ -41,27 +35,23 @@ const FreeContentMap = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  const handleFullContent = (e: any) => {
+  const handleFullContent = (e: ContentItem) => {
     setId(e);
-
     setFullContent((prev) => prev);
   };
 
-  const handleLike = (e: any) => {
+  const handleLike = (e: number) => {
     setContentId(e);
-
     like(e);
   };
 
-  const handleDisLike = (e: any) => {
+  const handleDisLike = (e: number) => {
     setContentId(e);
-
     disLike(e);
   };
 
-  const handleDelete = (e: any) => {
+  const handleDelete = (e: number) => {
     setContentId(e);
-
     deleteContent(e);
   };
 
@@ -71,7 +61,7 @@ const FreeContentMap = () => {
         <Content
           handleFullContent={handleFullContent}
           id={id}
-          key={index}
+          key={index}s
           item={item}
           handleLike={handleLike}
           handleDisLike={handleDisLike}

@@ -15,29 +15,31 @@ import {
   MenuList,
   MenuItem,
   Button,
+  Input,
 } from "@chakra-ui/react";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import { HiDotsHorizontal } from "react-icons/hi";
 
 const Content = ({
   item,
-  id,
   handleFullContent,
   handleLike,
   handleDisLike,
   handleDelete,
-}: any) => {
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [timestamp, setTimestamp] = useState(item.dateCreated); // Example timestamp
-  const [timeAgo, setTimeAgo] = useState<SetStateAction<any>>(null);
+  const [timestamp, setTimestamp] = useState(item.dateCreated);
+  const [timeAgo, setTimeAgo] = useState(null);
+  const [isMintModalOpen, setIsMintModalOpen] = useState(false);
+  const [ethAmount, setEthAmount] = useState(""); // State for ETH amount
+  const [isMinted, setIsMinted] = useState(false); // Track if content is minted
 
   useEffect(() => {
     const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
     const elapsedTime = currentTime - Number(timestamp); // Elapsed time in seconds
 
-    const getTimeAgo = (elapsedTime: any) => {
-      // Define time intervals in seconds
+    const getTimeAgo = (elapsedTime) => {
       const minute = 60;
       const hour = 60 * minute;
       const day = 24 * hour;
@@ -45,7 +47,6 @@ const Content = ({
       const month = 30 * day;
       const year = 365 * day;
 
-      // Determine the appropriate time interval
       if (elapsedTime < minute) {
         return "Just now";
       } else if (elapsedTime < hour) {
@@ -70,169 +71,200 @@ const Content = ({
     };
 
     setTimeAgo(getTimeAgo(elapsedTime));
-    setTimestamp((prevTime: any) => prevTime);
+    setTimestamp((prevTime) => prevTime);
   }, [timestamp]);
 
+  const handleMint = () => {
+    if (ethAmount) {
+      // Simulate minting process
+      console.log(`Minting content with id: ${item.id}, ETH amount: ${ethAmount}`);
+
+      // Close the modal and mark content as minted
+      setIsMinted(true);
+      setIsMintModalOpen(false);
+    }
+  };
+
   return (
-    <GridItem
-      w={"100%"}
-      bg={"#1d1a27"}
-      p={".7rem"}
-      borderRadius={".5rem"}
-      boxShadow="0 5px 14px 0 #0001"
-    >
-      <Flex align={"center"} justify={"space-between"}>
-        <Flex align={"center"} gap={".5rem"} mb={"1rem"}>
-          <Img
-            src={`https://${item.creatorImage}`} // Assuming creatorProfile is the URL to the creator's profile image
-            w={["40px", "40px", "50px", "50px"]}
-            h={["40px", "40px", "50px", "50px"]}
-            objectFit={"cover"}
-            borderRadius={"100%"}
-            alt="Creator Profile"
-          />
-          <Flex align={"end"} gap={".4rem"}>
-            <Box>
-              <Text>{item.creatorProfile}</Text>
-            </Box>
-            <Text color={"#9f51c6"}>. {timeAgo}</Text>
-          </Flex>
-        </Flex>
-        <Menu>
-          {({ isOpen }) => (
-            <>
-              <MenuButton
-                minWidth={"0"}
-                bg={"none"}
-                aria-label={"More"}
-                px={"0"}
-                border={"none"}
-                _hover={{ background: "none", border: "none" }}
-                _focus={{ outline: "none" }}
-                _active={{ background: "none" }}
-                isActive={isOpen}
-                as={Button}
-              >
-                <Icon
-                  as={HiDotsHorizontal}
-                  color={"#fff"}
-                  fontSize={"1.3rem"}
-                />
-              </MenuButton>
-              <MenuList bg={"#13111a"} border={"none"}>
-                <MenuItem
-                  bg={"#13111a"}
-                  _hover={{ background: "none" }}
-                  _focus={{ background: "none", outline: "none" }}
-                  onClick={() => handleDelete(Number(item.id))}
-                >
-                  Delete
-                </MenuItem>
-              </MenuList>
-            </>
-          )}
-        </Menu>
-      </Flex>
-      <Box
-        mb={"1rem"}
-        onClick={() => {
-          onOpen();
-          handleFullContent(item);
-        }}
+    !isMinted && (
+      <GridItem
+        w={"100%"}
+        bg={"#123"}
+        p={".7rem"}
+        borderRadius={".5rem"}
+        boxShadow="0 5px 14px 0 #0001"
       >
-        <Text mb={".5rem"}>{item.title}</Text>
-        {(item.contentType === "image" && (
-          <Img
-            mb={"1rem"}
-            src={`https://${item.ipfsHash}`} // Assuming ipfsHash is the URL to the content image
-            alt="Content Image"
-            h={"200px"}
-            w={"100%"}
-            objectFit={"cover"}
-            cursor={"pointer"}
-            borderRadius={".5rem"}
-          />
-        )) ||
-          (item.contentType === "video" && (
-            <video src={`https://${item.ipfsHash}`} width="100%" height="100" />
-          )) ||
-          (item.contentType === "audio" && (
-            <audio src={`https://${item.ipfsHash}`} controls />
-          ))}
-      </Box>
-      <Flex justify={"space-between"}>
-        <Box>
-          <Flex gap={"1.5rem"} align={"center"}>
-            <Flex
-              gap={".2rem"}
-              onClick={() => {
-                handleLike(Number(item.id));
-              }}
-              cursor={"pointer"}
-              align={"center"}
-            >
-              <Icon as={FaThumbsUp} fontSize={"1rem"} />
-              <Text>{Number(item.likes)}</Text>
+        <Flex align={"center"} justify={"space-between"}>
+          <Flex align={"center"} gap={".5rem"} mb={"1rem"}>
+            <Img
+              src={item.creatorImage} // Using local or placeholder image
+              w={["40px", "40px", "50px", "50px"]}
+              h={["40px", "40px", "50px", "50px"]}
+              objectFit={"cover"}
+              borderRadius={"100%"}
+              alt="Creator Profile"
+            />
+            <Flex align={"end"} gap={".4rem"}>
+              <Box>
+                <Text>{item.creatorProfile}</Text>
+              </Box>
+              <Text color={"#3A8DFF"}>. {timeAgo}</Text>
             </Flex>
-            <Flex
-              gap={".2rem"}
-              onClick={() => {
-                handleDisLike(Number(item.id));
-              }}
-              cursor={"pointer"}
-              align={"center"}
-            >
-              <Icon as={FaThumbsDown} fontSize={"1rem"} />
-              <Text>{Number(item.dislikes)}</Text>
-            </Flex>
-            {/* <Flex gap={".2rem"} align={"center"}>
-              <Icon as={FiEye} fontSize={"1rem"} />
-              <Text>{Number(item.views)}</Text>
-            </Flex> */}
           </Flex>
-        </Box>
+          <Menu>
+            {({ isOpen }) => (
+              <>
+                <MenuButton
+                  minWidth={"0"}
+                  bg={"none"}
+                  aria-label={"More"}
+                  px={"0"}
+                  border={"none"}
+                  _hover={{ background: "none", border: "none" }}
+                  _focus={{ outline: "none" }}
+                  _active={{ background: "none" }}
+                  isActive={isOpen}
+                  as={Button}
+                >
+                  <Icon
+                    as={HiDotsHorizontal}
+                    color={"#fff"}
+                    fontSize={"1.3rem"}
+                  />
+                </MenuButton>
+                <MenuList bg={"#13111a"} border={"none"}>
+                  <MenuItem
+                    bg={"#13111a"}
+                    _hover={{ background: "none" }}
+                    _focus={{ background: "none", outline: "none" }}
+                    onClick={() => handleDelete(Number(item.id))}
+                  >
+                    Delete
+                  </MenuItem>
+                </MenuList>
+              </>
+            )}
+          </Menu>
+        </Flex>
         <Box
-          borderRadius={"50rem"}
-          px={"1rem"}
-          bgGradient="linear(to-r, #e94c91, #5555fb)"
-          border={"none"}
-          color={"#fff"}
-          transition={"all .5s ease-in-out"}
-          _focus={{ outline: "none" }}
+          mb={"1rem"}
+          onClick={() => {
+            onOpen();
+            handleFullContent(item);
+          }}
         >
-          {item.contentType}
+          <Text mb={".5rem"}>{item.title}</Text>
+          {item.contentType === "image" && (
+            <Img
+              mb={"1rem"}
+              src={item.ipfsHash} // Local dummy image URL
+              alt="Content Image"
+              h={"200px"}
+              w={"100%"}
+              objectFit={"cover"}
+              cursor={"pointer"}
+              borderRadius={".5rem"}
+            />
+          )}
+          {item.contentType === "video" && (
+            <video src={item.ipfsHash} width="100%" height="100" controls />
+          )}
+          {item.contentType === "audio" && (
+            <audio src={item.ipfsHash} controls />
+          )}
         </Box>
-      </Flex>
-      <Modal isCentered isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
-        <ModalContent mb={6} mt={20} bg={"#1d1a27"} className="font">
-          <ModalBody>
-            <Text mb={".5rem"}>{id?.title}</Text>
-            {(item.contentType === "image" && (
-              <Img
-                mb={"1rem"}
-                src={`https://${id?.ipfsHash}`} // Assuming ipfsHash is the URL to the content image
-                alt="Content Image"
-                objectFit={"cover"}
+        <Flex justify={"space-between"}>
+          <Box>
+            <Flex gap={"1.5rem"} align={"center"}>
+              <Flex
+                gap={".2rem"}
+                onClick={() => handleLike(Number(item.id))}
                 cursor={"pointer"}
-                borderRadius={".5rem"}
+                align={"center"}
+              >
+                <Icon as={FaThumbsUp} fontSize={"1rem"} />
+                <Text>{Number(item.likes)}</Text>
+              </Flex>
+              <Flex
+                gap={".2rem"}
+                onClick={() => handleDisLike(Number(item.id))}
+                cursor={"pointer"}
+                align={"center"}
+              >
+                <Icon as={FaThumbsDown} fontSize={"1rem"} />
+                <Text>{Number(item.dislikes)}</Text>
+              </Flex>
+            </Flex>
+          </Box>
+          <Button
+            borderRadius={"50rem"}
+            px={"1rem"}
+            bgGradient="linear(to-r, #3A8DFF, #3A8DFF)"
+            border={"none"}
+            color={"#000"}
+            transition={"all .5s ease-in-out"}
+            _focus={{ outline: "none" }}
+            onClick={() => setIsMintModalOpen(true)}
+          >
+            Mint
+          </Button>
+        </Flex>
+
+        {/* Modal for Minting */}
+        <Modal isOpen={isMintModalOpen} onClose={() => setIsMintModalOpen(false)}>
+          <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
+          <ModalContent bg={"#1d1a27"}>
+            <ModalBody p={6}>
+              <Text mb={4}>Enter ETH Amount to Mint:</Text>
+              <Input
+                placeholder=" 0.000409 ETH"
+                value={ethAmount}
+                onChange={(e) => setEthAmount(e.target.value)}
+                mb={4}
               />
-            )) ||
-              (item.contentType === "video" && (
+              <Button
+                bgGradient="linear(to-r, #3A8DFF, #3A8DFF)"
+                color="#fff"
+                onClick={handleMint}
+              >
+                Mint Content
+              </Button>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+
+        {/* Modal for Full Content */}
+        <Modal isCentered isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
+          <ModalContent mb={6} mt={20} bg={"#1d1a27"}>
+            <ModalBody>
+              <Text mb={".5rem"}>{item.title}</Text>
+              {item.contentType === "image" && (
+                <Img
+                  mb={"1rem"}
+                  src={item.ipfsHash}
+                  alt="Content Image"
+                  objectFit={"cover"}
+                  cursor={"pointer"}
+                  borderRadius={".5rem"}
+                />
+              )}
+              {item.contentType === "video" && (
                 <video width="750" height="500" controls>
-                  <source src={`https://${id?.ipfsHash}`} />
+                  <source src={item.ipfsHash} />
                 </video>
-              )) ||
-              (item.contentType === "audio" && (
+              )}
+              {item.contentType === "audio" && (
                 <audio controls>
-                  <source src={`https://${id?.ipfsHash}`} />
+                  <source src={item.ipfsHash} />
                   Your browser does not support the audio element.
                 </audio>
-              ))}
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-    </GridItem>
+              )}
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      </GridItem>
+    )
   );
 };
 

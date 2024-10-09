@@ -64,7 +64,7 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
             bgGradient="linear(to-r, #fff, #fff)"
             bgClip={"text"}
           >
-             CCP Platform
+             CC Platform
           </Text>
           <ConnectButton />
         </Box>

@@ -2,9 +2,9 @@ import { Box, Grid, GridItem } from "@chakra-ui/react";
 import FreeLike from "./OverviewComponents/FreeLike";
 import FreeDislike from "./OverviewComponents/FreeDislike";
 import FreeContent from "./OverviewComponents/FreeContent";
-import ExclusiveDislike from "./OverviewComponents/ExclusiveDislike";
-import ExclusiveLike from "./OverviewComponents/ExclusiveLike";
-import ExclusiveContent from "./OverviewComponents/ExclusiveContent";
+// import ExclusiveDislike from "./OverviewComponents/ExclusiveDislike";
+// import ExclusiveLike from "./OverviewComponents/ExclusiveLike";
+// import ExclusiveContent from "./OverviewComponents/ExclusiveContent";
 
 const Overview = () => {
   // Queries to fetch data
@@ -29,15 +29,15 @@ const Overview = () => {
         </GridItem>
 
         <GridItem>
-          <ExclusiveLike />
+          {/* <ExclusiveLike /> */}
         </GridItem>
 
         <GridItem>
-          <ExclusiveDislike />
+          {/* <ExclusiveDislike /> */}
         </GridItem>
 
         <GridItem>
-          <ExclusiveContent />
+          {/* <ExclusiveContent /> */}
         </GridItem>
       </Grid>
     </Box>

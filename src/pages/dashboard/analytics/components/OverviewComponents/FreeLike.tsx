@@ -57,7 +57,7 @@ function FreeLike() {
   return (
     <Box>
       <Box
-        bgGradient="linear(to-r, #1d1a27, #1d1a27)"
+        bgGradient="linear(to-r, #123, #123)"
         color="#e9ecef"
         boxShadow="0 5px 14px 0 #0001"
         transition={"all .5s ease-in-out"}
@@ -65,7 +65,7 @@ function FreeLike() {
         px={"1rem"}
       >
         <Text className="font" fontWeight={"500"} fontSize={"1rem"} mb={"1rem"}>
-          All Free Liked Content
+          All Liked Content
         </Text>
         {isLoading ? (
           <Text className="font" fontWeight={"600"} fontSize={"1rem"}>

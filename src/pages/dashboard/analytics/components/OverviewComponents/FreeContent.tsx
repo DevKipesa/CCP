@@ -56,7 +56,7 @@ const FreeContent = () => {
   return (
     <div>
       <Box
-        bgGradient="linear(to-r, #1d1a27, #1d1a27)"
+        bgGradient="linear(to-r, #123, #123)"
         color="#e9ecef"
         boxShadow="0 5px 14px 0 #0001"
         transition={"all .5s ease-in-out"}
@@ -64,7 +64,7 @@ const FreeContent = () => {
         px={"1rem"}
       >
         <Text className="font" fontWeight={"500"} fontSize={"1rem"} mb={"1rem"}>
-          All Free Content Created
+          All Content Created
         </Text>
 
         {isLoading ? (

@@ -69,11 +69,7 @@ const DashboardMenu = () => {
                 bgGradient="linear(to-r, #e94c91, #5555fb)"
                 bgClip={"text"}
               >
-                cre
-                <Text as={"span"} fontSize={"1.8rem"} color={"#e9ecef"}>
-                  8
-                </Text>
-                ify
+                CC Platform
               </Text>
               <ConnectButton />
             </Box>

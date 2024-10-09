@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Content from "./Content";
-import useFetchFreeContent from "../../../../hooks/useFetchFreeContent";
 import { Grid } from "@chakra-ui/react";
 import useLike from "../../../../hooks/useLike";
 import useDisLike from "../../../../hooks/useDisLike";
 import useDelete from "../../../../hooks/useDelete";
+import dummyData from "./dummyData"; // Import the dummy data
 
 interface ContentItem {
   title: string;
@@ -25,49 +25,38 @@ interface ContentItem {
 }
 
 const ContentMap = () => {
-  const { data: contentItems = [], loading, error } = useFetchFreeContent();
-  const [fullContent, setFullContent] = useState(contentItems);
-  const [id, setId] = useState<ContentItem | undefined>(
-    (fullContent as ContentItem[])[0]
-  );
+  const [fullContent, setFullContent] = useState(dummyData);
+  const [id, setId] = useState<ContentItem | undefined>(dummyData[0]);
 
-  const [contentId, setContentId] = useState(Number(""));
-  // console.log(contentId);
+  const [contentId, setContentId] = useState<number>(0);
 
   const like = useLike();
   const disLike = useDisLike();
   const deleteContent = useDelete();
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-
-  const handleFullContent = (e: any) => {
+  const handleFullContent = (e: ContentItem) => {
     setId(e);
-
     setFullContent((prev) => prev);
   };
 
-  const handleLike = (e: any) => {
+  const handleLike = (e: number) => {
     setContentId(e);
-
     like(e);
   };
 
-  const handleDisLike = (e: any) => {
+  const handleDisLike = (e: number) => {
     setContentId(e);
-
     disLike(e);
   };
 
-  const handleDelete = (e: any) => {
+  const handleDelete = (e: number) => {
     setContentId(e);
-
     deleteContent(e);
   };
 
   return (
     <Grid templateColumns="repeat(1, 1fr)" gap={6}>
-      {(contentItems as ContentItem[]).map((item, index) => (
+      {dummyData.map((item, index) => (
         <Content
           handleFullContent={handleFullContent}
           id={id}

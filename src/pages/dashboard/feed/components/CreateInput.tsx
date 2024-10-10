@@ -22,15 +22,15 @@ import { ChangeEvent, useState } from "react";
 import useGetUserDetails from "../../../../hooks/useGetUserDetails";
 import "../../../../App.css";
 import useCreateExclContent from "../../../../hooks/useCreateExclContent";
-import useCheckRegUser from "../../../../hooks/useCheckRegUser";
+// import useCheckRegUser from "../../../../hooks/useCheckRegUser";
 
 const CreateInput = () => {
   const [title, setTitle] = useState<string>("");
   const [ipfsHash, setIpfsHash] = useState<string>("");
   const [contentType, setContentType] = useState("");
   const { data: userDetails } = useGetUserDetails();
-  const [exclusive, setExclusive] = useState(false);
-  const regUser = useCheckRegUser();
+  // const [exclusive, setExclusive] = useState(false);
+  // const regUser = useCheckRegUser();
   // console.log(regUser);
 
   const OverlayOne = () => (
@@ -40,13 +40,13 @@ const CreateInput = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = useState(<OverlayOne />);
 
-  const handleExclusive = () => {
-    if (exclusive === false) {
-      setExclusive(true);
-    } else {
-      setExclusive(false);
-    }
-  };
+  // const handleExclusive = () => {
+  //   if (exclusive === false) {
+  //     setExclusive(true);
+  //   } else {
+  //     setExclusive(false);
+  //   }
+  // };
 
   const handleCaption = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(e.target.value);
@@ -165,7 +165,6 @@ const CreateInput = () => {
             _hover={{ border: "1px solid #3A8DFF" }}
           />
           <ModalBody pb={"1.7rem"}>
-            {exclusive ? (
               <Box
                 boxShadow={"0 0 0 1px #2f2f30"}
                 py={"1rem"}
@@ -469,7 +468,7 @@ const CreateInput = () => {
                   </Button>
                 </Flex>
               </Box>
-            )}
+            )
           </ModalBody>
         </ModalContent>
       </Modal>

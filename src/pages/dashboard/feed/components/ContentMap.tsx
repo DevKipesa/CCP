@@ -4,7 +4,7 @@ import { Grid } from "@chakra-ui/react";
 import useLike from "../../../../hooks/useLike";
 import useDisLike from "../../../../hooks/useDisLike";
 import useDelete from "../../../../hooks/useDelete";
-import dummyData from "./dummyData";
+import dummyData from "../../../../hooks/dummy";
 
 // Update the ContentItem interface to match your dummy data structure
 interface ContentItem {
@@ -46,7 +46,7 @@ const ContentMap = () => {
     <Grid templateColumns="repeat(1, 1fr)" gap={6}>
       {dummyData.map((item: ContentItem) => (
         <Content
-          handleFullContennvm t={handleFullContent}
+          handleFullContent={handleFullContent}
           id={id}
           key={item.id} // Use item.id as the key for better performance
           item={item}

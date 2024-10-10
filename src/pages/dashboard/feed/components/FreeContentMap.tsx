@@ -1,3 +1,4 @@
+// src/pages/dashboard/feed/components/FreeContentMap.tsx
 import { useState } from "react";
 import Content from "./Content";
 import useFetchFreeContent from "../../../../hooks/useFetchFreeContent";
@@ -5,28 +6,11 @@ import { Grid } from "@chakra-ui/react";
 import useLike from "../../../../hooks/useLike";
 import useDisLike from "../../../../hooks/useDisLike";
 import useDelete from "../../../../hooks/useDelete";
-
-interface ContentItem {
-  id: number;
-  title: string;
-  item:string;
-  description: string; // Ensure this matches the Content component's expected structure
-  creatorProfile: string;
-  creatorImage: string; // Ensure this is included
-  dateCreated: string; // This should be a string based on your Content component
-  contentType: "image" | "video" | "audio"; // Match the type
-  ipfsHash: string; // The hash for the content
-  likes: number;
-  dislikes: number;
-}
+import { ContentItem } from "../../../../hooks/types";
 
 const FreeContentMap = () => {
   const { data: contentItems = [], loading, error } = useFetchFreeContent();
-  const [fullContent, setFullContent] = useState(contentItems);
-  const [id, setId] = useState<ContentItem | undefined>(
-    (fullContent as ContentItem[])[0]
-  );
-  const [contentId, setContentId] = useState<number | undefined>(undefined);
+  const [selectedItemId, setSelectedItemId] = useState<number | undefined>(undefined); // Change to number | undefined
 
   const like = useLike();
   const disLike = useDisLike();
@@ -35,33 +19,29 @@ const FreeContentMap = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  const handleFullContent = (e: ContentItem) => {
-    setId(e);
-    setFullContent((prev) => prev);
+  const handleFullContent = (item: ContentItem) => {
+    setSelectedItemId(item.id); // Set the ID of the selected item
   };
 
   const handleLike = (e: number) => {
-    setContentId(e);
     like(e);
   };
 
   const handleDisLike = (e: number) => {
-    setContentId(e);
     disLike(e);
   };
 
   const handleDelete = (e: number) => {
-    setContentId(e);
     deleteContent(e);
   };
 
   return (
     <Grid templateColumns="repeat(1, 1fr)" gap={6}>
-      {(contentItems as ContentItem[]).map((item, index) => (
+      {(contentItems as ContentItem[]).map((item) => (
         <Content
           handleFullContent={handleFullContent}
-          id={id}
-          key={index}s
+          id={selectedItemId} // Pass the selected ID
+          key={item.id} // Use item.id as the key for better performance
           item={item}
           handleLike={handleLike}
           handleDisLike={handleDisLike}

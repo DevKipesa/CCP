@@ -40,17 +40,24 @@ export interface ProposalView {
 }
 // src/types.ts
 // types.ts
+// types.ts
 export interface ContentItem {
-  id: number;
-  creatorProfile: string;
-  creatorImage: string;
-  dateCreated: number; // Keep as number for Unix timestamp
   title: string;
-  contentType: string;
+  id: number;
+  dateCreated: number;
+  creatorProfile: string;
   ipfsHash: string;
+  creator: string;
+  isDeleted: boolean;
+  isMonetized: boolean;
+  views: number;
   likes: number;
   dislikes: number;
-  // Remove these lines if they are not needed
-  // description?: string; // Optional if you want to keep it
-  // item?: any; // Optional if you want to keep it
+  shares: number;
+  rating: number;
+  contentType: string;
+  creatorImage: string;
+  description?: string; // Optional if not every ContentItem has this
+  item?: any; // Specify the type here or make it optional
 }
+

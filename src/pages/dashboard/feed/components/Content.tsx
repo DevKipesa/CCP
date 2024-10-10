@@ -20,20 +20,20 @@ import {
 import { useEffect, useState } from "react";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import { HiDotsHorizontal } from "react-icons/hi";
-
-interface ContentItem {
-  title: string;
-  description: string;
-  creatorProfile: string;
-  creatorImage: string;
-  dateCreated: string;
-  contentType: "image" | "video" | "audio";
-  ipfsHash: string;
-  likes: number;
-  dislikes: number;
-  item: string;
-  id?: number; // Adjusted to match its use elsewhere
-}
+import { ContentItem } from "../../../../hooks/types";
+// interface ContentItem {
+//   title: string;
+//   description: string;
+//   creatorProfile: string;
+//   creatorImage: string;
+//   dateCreated: string;
+//   contentType: "image" | "video" | "audio";
+//   ipfsHash: string;
+//   likes: number;
+//   dislikes: number;
+//   item: string;
+//   id?: number; // Adjusted to match its use elsewhere
+// }
 
 interface ContentProps {
   handleFullContent: (item: ContentItem) => void; // Ensure this matches
@@ -94,7 +94,7 @@ const Content: React.FC<ContentProps> = ({
     };
 
     setTimeAgo(getTimeAgo(elapsedTime));
-    setTimestamp((prevTime: string) => prevTime);
+    setTimestamp((prevTime: number) => prevTime);
   }, [timestamp]);
 
   const handleMint = () => {

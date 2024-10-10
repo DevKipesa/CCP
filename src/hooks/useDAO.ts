@@ -25,12 +25,9 @@ const useContentDAO = () => {
 
       try {
         const transaction = await contract.joinDAO(stakeAmount);
-        // console.log("transaction: ", transaction);
-
-        const receipt = await transaction.wait();
-        // console.log("receipt: ", receipt);
+        await transaction.wait(); // No need to assign receipt if not used
       } catch (error: unknown) {
-        // console.log(error);
+        console.error(error);
       }
     },
     [chainId, walletProvider]
@@ -47,12 +44,9 @@ const useContentDAO = () => {
 
     try {
       const transaction = await contract.leaveDAO();
-      //  console.log("transaction: ", transaction);
-
-      const receipt = await transaction.wait();
-      //  console.log("receipt: ", receipt);
+      await transaction.wait(); // Removed unused receipt
     } catch (error: unknown) {
-      //  console.log(error);
+      console.error(error);
     }
   }, [chainId, walletProvider]);
 
@@ -72,12 +66,9 @@ const useContentDAO = () => {
           description,
           duration
         );
-        // console.log("transaction: ", transaction);
-
-        const receipt = await transaction.wait();
-        // console.log("receipt: ", receipt);
+        await transaction.wait(); // Removed unused receipt
       } catch (error: unknown) {
-        // console.log(error);
+        console.error(error);
       }
     },
     [chainId, walletProvider]
@@ -95,12 +86,9 @@ const useContentDAO = () => {
 
       try {
         const transaction = await contract.voteForProposal(proposalIndex);
-        //  console.log("transaction: ", transaction);
-
-        const receipt = await transaction.wait();
-        //  console.log("receipt: ", receipt);
+        await transaction.wait(); // Removed unused receipt
       } catch (error: unknown) {
-        //  console.log(error);
+        console.error(error);
       }
     },
     [chainId, walletProvider]
@@ -118,12 +106,9 @@ const useContentDAO = () => {
 
       try {
         const transaction = await contract.voteAgainstProposal(proposalIndex);
-        //  console.log("transaction: ", transaction);
-
-        const receipt = await transaction.wait();
-        //  console.log("receipt: ", receipt);
+        await transaction.wait(); // Removed unused receipt
       } catch (error: unknown) {
-        //  console.log(error);
+        console.error(error);
       }
     },
     [chainId, walletProvider]
@@ -141,12 +126,9 @@ const useContentDAO = () => {
 
       try {
         const transaction = await contract.executeProposal(proposalIndex);
-        // console.log("transaction: ", transaction);
-
-        const receipt = await transaction.wait();
-        // console.log("receipt: ", receipt);
+        await transaction.wait(); // Removed unused receipt
       } catch (error: unknown) {
-        // console.log(error);
+        console.error(error);
       }
     },
     [chainId, walletProvider]
@@ -177,7 +159,7 @@ const useContentDAO = () => {
 
       return proposals;
     } catch (error: unknown) {
-      // console.log(error);
+      console.error(error);
       return [];
     }
   }, [chainId, walletProvider]);

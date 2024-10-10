@@ -3,18 +3,6 @@ import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 import { getAuthContract } from "../constants/contract";
 import { readOnlyProvider } from "../constants/provider";
 
-// interface UserDetails {
-//   username: string;
-//   walletAddress: string;
-//   profileImage: string;
-// }
-
-// interface State {
-//   loading: boolean;
-//   data?: UserDetails;
-//   error?: string;
-// }
-
 const useCheckRegUser = () => {
   const { address } = useWeb3ModalAccount();
 
@@ -22,11 +10,11 @@ const useCheckRegUser = () => {
     const fetchUserDetails = async () => {
       try {
         const contract = getAuthContract(readOnlyProvider);
-        const response = await contract.checkRegisteredUsers(address);
+        await contract.checkRegisteredUsers(address);
 
-        // console.log(response);
+        // Response handled elsewhere or not needed
       } catch (err: any) {
-        // console.log(err.message);
+        // Handle the error
       }
     };
 

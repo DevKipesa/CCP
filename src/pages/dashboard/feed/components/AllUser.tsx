@@ -16,7 +16,8 @@ const AllUser = () => {
     fetchContent(creator);
   };
 
-  // console.log("Content", content);
+  // Optionally log or use the content in your UI
+  console.log("Fetched content:", content); // Example usage
 
   return (
     <Box display={"flex"} flexDirection={"column"} gap={"2rem"}>

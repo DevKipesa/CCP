@@ -21,34 +21,19 @@ import { useEffect, useState } from "react";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import { HiDotsHorizontal } from "react-icons/hi";
 
-// Define ContentItem interface
-// interface ContentItem {
-//   id: number;
-//   item:string;
-//   title: string;
-//   description: string;
-//   creatorProfile: string;
-//   creatorImage: string;
-//   dateCreated: string; // Assuming it's a string
-//   contentType: "image" | "video" | "audio"; // You can expand this as necessary
-//   ipfsHash: string; // The hash for the content
-//   likes: number;
-//   dislikes: number;
-// }
 interface ContentItem {
   title: string;
-  description: string; // Add this line
+  description: string;
   creatorProfile: string;
-  creatorImage: string; // Ensure this is included
-  dateCreated: string; // Ensure the type matches (string)
-  contentType: "image" | "video" | "audio"; // This should match the type in Content
-  ipfsHash: string; // The hash for the content
+  creatorImage: string;
+  dateCreated: string;
+  contentType: "image" | "video" | "audio";
+  ipfsHash: string;
   likes: number;
   dislikes: number;
-  item:string;
-  id?: ContentItem;
+  item: string;
+  id?: number; // Adjusted to match its use elsewhere
 }
-
 
 interface ContentProps {
   item: ContentItem;
@@ -115,7 +100,7 @@ const Content: React.FC<ContentProps> = ({
     if (ethAmount) {
       console.log(`Minting content with id: ${item.id}, ETH amount: ${ethAmount}`);
       setIsMinted(true);
-      setIsMintModalOpen(false);
+      setIsMintModalOpen(false); // Automatically close the modal
     }
   };
 
@@ -123,10 +108,10 @@ const Content: React.FC<ContentProps> = ({
     !isMinted && (
       <GridItem
         w={"100%"}
-        bg={"#123"}
+        bg={"#1a202c"} // Changed card background color to Chakra's "gray.900" shade
         p={".7rem"}
         borderRadius={".5rem"}
-        boxShadow="0 5px 14px 0 #0001"
+        boxShadow="0 5px 14px 0 rgba(0, 0, 0, 0.1)"
       >
         <Flex align={"center"} justify={"space-between"}>
           <Flex align={"center"} gap={".5rem"} mb={"1rem"}>
@@ -237,12 +222,13 @@ const Content: React.FC<ContentProps> = ({
             color={"white"}
             variant={"solid"}
             onClick={() => setIsMintModalOpen(true)}
-            _hover={{ background: "none", transform: "translateY(-3px)" }}
+            _hover={{ background: "none" }}
           >
             Mint
           </Button>
         </Flex>
 
+        {/* Modal for Full Content */}
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
@@ -256,22 +242,25 @@ const Content: React.FC<ContentProps> = ({
         {/* Minting Modal */}
         <Modal isOpen={isMintModalOpen} onClose={() => setIsMintModalOpen(false)}>
           <ModalOverlay />
-          <ModalContent>
+          <ModalContent bg="#222">
             <ModalBody>
               <Text fontSize={"lg"}>Mint this content</Text>
               <Input
-                placeholder="Enter ETH amount"
+                placeholder="0.000402 ETH"
                 value={ethAmount}
                 onChange={(e) => setEthAmount(e.target.value)}
                 mb={4}
               />
               <Button
-                colorScheme="teal"
-                onClick={handleMint}
-                disabled={!ethAmount}
-              >
-                Confirm Mint
+            bg="#3A8DFF" // Set the background color
+           color="white" // Set the text color
+            _hover={{ bg: "#30c0d9" }} // Change the background color on hover
+            onClick={handleMint}
+            disabled={!ethAmount}
+             >
+             Confirm Mint
               </Button>
+
             </ModalBody>
           </ModalContent>
         </Modal>

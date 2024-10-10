@@ -24,12 +24,9 @@ const useVault = () => {
 
       try {
         const transaction = await contract.stake(amount, signer.getAddress());
-        // console.log("transaction: ", transaction);
-
-        // const receipt = await transaction.wait();
-        // console.log("receipt: ", receipt);
+        await transaction.wait(); // Ensure the transaction completes
       } catch (error: unknown) {
-        // console.log(error);
+        console.error(error);
       }
     },
     [chainId, walletProvider]
@@ -51,12 +48,9 @@ const useVault = () => {
           signer.getAddress(),
           creator
         );
-        // console.log("transaction: ", transaction);
-
-        const receipt = await transaction.wait();
-        // console.log("receipt: ", receipt);
+        await transaction.wait(); // Ensure the transaction completes
       } catch (error: unknown) {
-        console.log(error);
+        console.error(error);
       }
     },
     [chainId, walletProvider]
@@ -78,12 +72,9 @@ const useVault = () => {
           signer.getAddress(),
           creator
         );
-        // console.log("transaction: ", transaction);
-
-        const receipt = await transaction.wait();
-        // console.log("receipt: ", receipt);
+        await transaction.wait(); // Ensure the transaction completes
       } catch (error: unknown) {
-        // console.log(error);
+        console.error(error);
       }
     },
     [chainId, walletProvider]
@@ -104,12 +95,9 @@ const useVault = () => {
           amount,
           signer.getAddress()
         );
-        // console.log("transaction: ", transaction);
-
-        const receipt = await transaction.wait();
-        // console.log("receipt: ", receipt);
+        await transaction.wait(); // Ensure the transaction completes
       } catch (error: unknown) {
-        // console.log(error);
+        console.error(error);
       }
     },
     [chainId, walletProvider]
@@ -128,10 +116,7 @@ const useVault = () => {
 
       try {
         const transaction = await contract.CreatorPayout(amount, creator);
-        // console.log("transaction: ", transaction);
-
-        const receipt = await transaction.wait();
-        // console.log("receipt: ", receipt);
+        await transaction.wait(); // Ensure the transaction completes
 
         // Calculate DAO and developer share
         const daoShare = Math.floor(amount * 0.1); // 10% for DAO
@@ -139,24 +124,17 @@ const useVault = () => {
 
         // Transfer DAO share to DAO contract
         const daoTransferTx = await daoContract.receiveDAOShare(daoShare);
-        // console.log("DAO transfer transaction: ", daoTransferTx);
-
-        const daoTransferReceipt = await daoTransferTx.wait();
-        // console.log("DAO transfer receipt: ", daoTransferReceipt);
+        await daoTransferTx.wait(); // Ensure DAO share transfer completes
 
         // Transfer developer share to developer address
-        // Replace 'developerAddress' with the actual developer address
         const developerAddress = "0x..."; // Replace with the actual developer address
         const developerTransferTx = await contract.transfer(
           developerAddress,
           developerShare
         );
-        // console.log("Developer transfer transaction: ", developerTransferTx);
-
-        const developerTransferReceipt = await developerTransferTx.wait();
-        // console.log("Developer transfer receipt: ", developerTransferReceipt);
+        await developerTransferTx.wait(); // Ensure developer transfer completes
       } catch (error: unknown) {
-        // console.log(error);
+        console.error(error);
       }
     },
     [chainId, walletProvider]

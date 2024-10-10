@@ -1,81 +1,52 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Content from "./Content";
 import { Grid } from "@chakra-ui/react";
 import useLike from "../../../../hooks/useLike";
 import useDisLike from "../../../../hooks/useDisLike";
 import useDelete from "../../../../hooks/useDelete";
 import useMyFreeContent from "../../../../hooks/useMyFreeContent";
+import { ContentItem } from "../../../../hooks/types"; // Adjust the path as necessary
 
-interface ContentItem {
-  title: string;
-  id: number;
-  dateCreated: number;
-  creatorProfile: string;
-  ipfsHash: string;
-  creator: string;
-  isDeleted: boolean;
-  isMonetized: boolean;
-  views: number;
-  likes: number;
-  dislikes: number;
-  shares: number;
-  rating: number;
-  contentType: string;
-  creatorImage: string;
-}
-
-const FreeContentMap: React.FC<{ userAddress: any }> = ({ userAddress }) => {
-  const {
-    data: contentItems = [],
-    loading,
-    error,
-  } = useMyFreeContent(userAddress);
-  const [fullContent, setFullContent] = useState(contentItems);
-  const [id, setId] = useState<ContentItem | undefined>(
-    (fullContent as ContentItem[])[0]
-  );
-  const [contentId, setContentId] = useState(Number(""));
-  // console.log(contentId);
-  // console.log(contentItems);
-
+const FreeContentMap: React.FC<{ userAddress: string }> = ({ userAddress }) => {
+  const { data: contentItems = [], loading, error } = useMyFreeContent(userAddress);
+  const [id, setId] = useState<ContentItem | undefined>(undefined);
+  
   const like = useLike();
   const disLike = useDisLike();
   const deleteContent = useDelete();
 
+  useEffect(() => {
+    if (contentItems.length > 0) {
+      setId(contentItems[0]);
+    }
+  }, [contentItems]);
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
-  const handleFullContent = (e: any) => {
-    setId(e);
-
-    setFullContent((prev) => prev);
+  const handleFullContent = (item: ContentItem) => {
+    setId(item);
   };
 
-  const handleLike = (e: any) => {
-    setContentId(e);
-
-    like(e);
+  const handleLike = (itemId: number) => {
+    like(itemId);
   };
 
-  const handleDisLike = (e: any) => {
-    setContentId(e);
-
-    disLike(e);
+  const handleDisLike = (itemId: number) => {
+    disLike(itemId);
   };
 
-  const handleDelete = (e: any) => {
-    setContentId(e);
-
-    deleteContent(e);
+  const handleDelete = (itemId: number) => {
+    deleteContent(itemId);
   };
 
   return (
     <Grid templateColumns="repeat(1, 1fr)" gap={6}>
-      {(contentItems as ContentItem[]).map((item, index) => (
+      {(contentItems as ContentItem[]).map((item) => (
         <Content
-          handleFullContent={handleFullContent}
+          handleContent={handleFullContent}
           id={id}
-          key={index}
+          key={item.id}
           item={item}
           handleLike={handleLike}
           handleDisLike={handleDisLike}

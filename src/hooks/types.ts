@@ -39,16 +39,18 @@ export interface ProposalView {
   // Add this new field (in seconds)
 }
 // src/types.ts
+// types.ts
 export interface ContentItem {
   id: number;
-  title: string;
-  item: string; // Ensure this matches the Content component's expected structure
-  description: string; // Ensure this matches the Content component's expected structure
   creatorProfile: string;
-  creatorImage: string; // Ensure this is included
-  dateCreated: string; // This should be a string based on your Content component
-  contentType: "image" | "video" | "audio"; // Match the type
-  ipfsHash: string; // The hash for the content
+  creatorImage: string;
+  dateCreated: number; // Keep as number for Unix timestamp
+  title: string;
+  contentType: string;
+  ipfsHash: string;
   likes: number;
   dislikes: number;
+  // Remove these lines if they are not needed
+  // description?: string; // Optional if you want to keep it
+  // item?: any; // Optional if you want to keep it
 }

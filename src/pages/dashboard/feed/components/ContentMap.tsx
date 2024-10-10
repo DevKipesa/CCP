@@ -4,24 +4,12 @@ import { Grid } from "@chakra-ui/react";
 import useLike from "../../../../hooks/useLike";
 import useDisLike from "../../../../hooks/useDisLike";
 import useDelete from "../../../../hooks/useDelete";
-import dummyData from "../../../../hooks/dummy";
-
-// Update the ContentItem interface to match your dummy data structure
-interface ContentItem {
-  id: number;
-  creatorProfile: string;
-  creatorImage: string;
-  dateCreated: number;
-  title: string;
-  contentType: string;
-  ipfsHash: string;
-  likes: number;
-  dislikes: number;
-}
+import dummyData from "../../../../hooks/dummy"; // Adjust the import path if needed
+import { ContentItem } from "../../../../hooks/types"; // Adjust the path to your types file
 
 const ContentMap = () => {
   const [id, setId] = useState<ContentItem | undefined>(dummyData[0]);
-  
+
   const like = useLike();
   const disLike = useDisLike();
   const deleteContent = useDelete();

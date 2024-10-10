@@ -22,26 +22,26 @@ const Feed = () => {
         >
           <Tab
             _selected={{
-              bgGradient: "linear(to-r, #fff, #fff)",
+              bgGradient: "linear(to-r, #e94c91, #5555fb)",
               bgClip: "text",
             }}
             _hover={{
-              bgGradient: "linear(to-r, #3A8DFF, #3A8DFF)",
+              bgGradient: "linear(to-r, #e94c91, #5555fb)",
               bgClip: "text",
             }}
             border={"none"}
             _focus={{ outline: "none" }}
             borderRadius={"0"}
           >
-           Content
+            Free
           </Tab>
-          {/* <Tab
+          <Tab
             _selected={{
-              bgGradient: "linear(to-r, #fff, #fff)",
+              bgGradient: "linear(to-r, #e94c91, #5555fb)",
               bgClip: "text",
             }}
             _hover={{
-              bgGradient: "linear(to-r, #3A8DFF, #3A8DFF)",
+              bgGradient: "linear(to-r, #e94c91, #5555fb)",
               bgClip: "text",
             }}
             border={"none"}
@@ -49,14 +49,14 @@ const Feed = () => {
             borderRadius={"0"}
           >
             Exclusive
-          </Tab> */}
+          </Tab>
           <Tab
             _selected={{
-              bgGradient: "linear(to-r, #fff, #fff)",
+              bgGradient: "linear(to-r, #e94c91, #5555fb)",
               bgClip: "text",
             }}
             _hover={{
-              bgGradient: "linear(to-r, #3A8DFF, #3A8DFF)",
+              bgGradient: "linear(to-r, #e94c91, #5555fb)",
               bgClip: "text",
             }}
             border={"none"}
@@ -67,11 +67,11 @@ const Feed = () => {
           </Tab>
           <Tab
             _selected={{
-              bgGradient: "linear(to-r, #fff, #fff)",
+              bgGradient: "linear(to-r, #e94c91, #5555fb)",
               bgClip: "text",
             }}
             _hover={{
-              bgGradient: "linear(to-r, #3A8DFF, #3A8DFF)",
+              bgGradient: "linear(to-r, #e94c91, #5555fb)",
               bgClip: "text",
             }}
             border={"none"}
@@ -90,7 +90,7 @@ const Feed = () => {
             <AllUser />
           </TabPanel>
           <TabPanel>
-            <MyFreeContentMap userAddress={address} />
+          <MyFreeContentMap userAddress={address || ""} />
           </TabPanel>
           <TabPanel>
             <p>Top Creators</p>

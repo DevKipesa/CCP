@@ -1,7 +1,6 @@
-// Import the centralized ContentItem type
 import { useState } from "react";
 import Content from "./Content";
-import { Grid } from "@chakra-ui/react";
+import { Grid, Spinner, Text } from "@chakra-ui/react"; // Import Spinner and Text for loading and error states
 import useLike from "../../../../hooks/useLike";
 import useDisLike from "../../../../hooks/useDisLike";
 import useDelete from "../../../../hooks/useDelete";
@@ -20,8 +19,13 @@ const FreeContentMap: React.FC<{ userAddress: string }> = ({ userAddress }) => {
   const disLike = useDisLike();
   const deleteContent = useDelete();
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  // Loading state
+  if (loading) return <Spinner size="lg" />; // Show a spinner while loading
+
+  // Error handling
+  if (error) {
+    return <Text color="red.500">Error: {error}</Text>; // Display a user-friendly error message
+  }
 
   const handleFullContent = (item: ContentItem) => {
     setId(item);

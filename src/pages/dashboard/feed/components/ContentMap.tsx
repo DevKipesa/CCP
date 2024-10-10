@@ -46,7 +46,7 @@ const ContentMap = () => {
     <Grid templateColumns="repeat(1, 1fr)" gap={6}>
       {dummyData.map((item: ContentItem) => (
         <Content
-          handleFullContent={handleFullContent}
+          handleContent={handleFullContent}
           id={id}
           key={item.id} // Use item.id as the key for better performance
           item={item}

@@ -36,8 +36,9 @@ interface ContentItem {
 }
 
 interface ContentProps {
+  handleFullContent: (item: ContentItem) => void; // Ensure this matches
+  id: ContentItem | undefined; // Ensure this matches
   item: ContentItem;
-  handleFullContent: (item: ContentItem) => void;
   handleLike: (id: number) => void;
   handleDisLike: (id: number) => void;
   handleDelete: (id: number) => void;

@@ -22,20 +22,20 @@ const Feed = () => {
         >
           <Tab
             _selected={{
-              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+              bgGradient: "linear(to-r, #fff, #fff)",
               bgClip: "text",
             }}
             _hover={{
-              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+              bgGradient: "linear(to-r, #3A8DFF, #3A8DFF)",
               bgClip: "text",
             }}
             border={"none"}
             _focus={{ outline: "none" }}
             borderRadius={"0"}
           >
-            Free
+            Content
           </Tab>
-          <Tab
+          {/* <Tab
             _selected={{
               bgGradient: "linear(to-r, #e94c91, #5555fb)",
               bgClip: "text",
@@ -49,14 +49,14 @@ const Feed = () => {
             borderRadius={"0"}
           >
             Exclusive
-          </Tab>
+          </Tab> */}
           <Tab
             _selected={{
               bgGradient: "linear(to-r, #e94c91, #5555fb)",
               bgClip: "text",
             }}
             _hover={{
-              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+              bgGradient: "linear(to-r, #3A8DFF, #3A8DFF)",
               bgClip: "text",
             }}
             border={"none"}
@@ -71,7 +71,7 @@ const Feed = () => {
               bgClip: "text",
             }}
             _hover={{
-              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+              bgGradient: "linear(to-r, #3A8DFF, #3A8DFF)",
               bgClip: "text",
             }}
             border={"none"}

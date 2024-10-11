@@ -21,7 +21,7 @@ import useCreateFreeContent from "../../../../hooks/useCreateFreeContent";
 import { ChangeEvent, useState } from "react";
 import useGetUserDetails from "../../../../hooks/useGetUserDetails";
 import "../../../../App.css";
-import useCreateExclContent from "../../../../hooks/useCreateExclContent";
+// import useCreateExclContent from "../../../../hooks/useCreateExclContent";
 // import useCheckRegUser from "../../../../hooks/useCheckRegUser";
 
 const CreateInput = () => {
@@ -106,13 +106,13 @@ const CreateInput = () => {
     userDetails?.profileImage || "" // Use optional chaining to access username
   );
 
-  const handleCreateExclusiveContent = useCreateExclContent(
-    title,
-    `${import.meta.env.VITE_GATEWAY_URL}/ipfs/${ipfsHash}`,
-    contentType,
-    userDetails?.username || "",
-    userDetails?.profileImage || "" // Use optional chaining to access username
-  );
+  // const handleCreateExclusiveContent = useCreateExclContent(
+  //   title,
+  //   `${import.meta.env.VITE_GATEWAY_URL}/ipfs/${ipfsHash}`,
+  //   contentType,
+  //   userDetails?.username || "",
+  //   userDetails?.profileImage || "" // Use optional chaining to access username
+  // );
 
   return (
     <Box mb={"3rem"}>
@@ -165,311 +165,141 @@ const CreateInput = () => {
             _hover={{ border: "1px solid #3A8DFF" }}
           />
           <ModalBody pb={"1.7rem"}>
-              <Box
-                boxShadow={"0 0 0 1px #2f2f30"}
-                py={"1rem"}
-                px={".8rem"}
-                borderRadius={".8rem"}
-                transition={"all 1s"}
-              >
-                <Textarea
-                  placeholder="About content"
-                  value={title}
-                  resize={"none"}
-                  border={"none"}
-                  _focus={{ boxShadow: "none" }}
-                  _placeholder={{ color: "#B7B7B6", fontSize: ".9rem" }}
-                  p={"0"}
-                  mb={"0.5"}
-                  onChange={handleCaption}
-                />
-                <Box mb={"1rem"}>
-                  {(contentType === "mp4" ||
-                    contentType === "avi" ||
-                    contentType === "mov") && (
-                    <video width={"500"} controls>
-                      <source
-                        src={`https://${
-                          import.meta.env.VITE_GATEWAY_URL
-                        }/ipfs/${ipfsHash}`}
-                      />
-                    </video>
-                  )}
-                  {(contentType === "jpeg" ||
-                    contentType === "jpg" ||
-                    contentType === "png" ||
-                    contentType === "gif") && (
-                    <Img
-                      src={`https://${
-                        import.meta.env.VITE_GATEWAY_URL
-                      }/ipfs/${ipfsHash}`}
-                      alt="image"
-                      w={"300px"}
-                      h={"300px"}
-                      objectFit={"cover"}
-                      borderRadius={".5rem"}
-                    />
-                  )}
+  <Box
+    boxShadow={"0 0 0 1px #2f2f30"}
+    py={"1rem"}
+    px={".8rem"}
+    borderRadius={".8rem"}
+    transition={"all 1s"}
+  >
+    <Textarea
+      placeholder="About content"
+      value={title}
+      resize={"none"}
+      border={"none"}
+      _focus={{ boxShadow: "none" }}
+      _placeholder={{ color: "#B7B7B6", fontSize: ".9rem" }}
+      p={"0"}
+      mb={"0.5rem"}
+      onChange={handleCaption}
+    />
+    <Box mb={"1rem"}>
+      {(contentType === "mp4" ||
+        contentType === "avi" ||
+        contentType === "mov") && (
+        <video width={"500"} controls>
+          <source
+            src={`https://${import.meta.env.VITE_GATEWAY_URL}/ipfs/${ipfsHash}`}
+          />
+        </video>
+      )}
+      {(contentType === "jpeg" ||
+        contentType === "jpg" ||
+        contentType === "png" ||
+        contentType === "gif") && (
+        <Img
+          src={`https://${import.meta.env.VITE_GATEWAY_URL}/ipfs/${ipfsHash}`}
+          alt="image"
+          w={"300px"}
+          h={"300px"}
+          objectFit={"cover"}
+          borderRadius={".5rem"}
+        />
+      )}
 
-                  {(contentType === "mp3" ||
-                    contentType === "wav" ||
-                    contentType === "ogg") && (
-                    <audio controls>
-                      <source
-                        src={`https://${
-                          import.meta.env.VITE_GATEWAY_URL
-                        }/ipfs/${ipfsHash}`}
-                      />
-                      Your browser does not support the audio element.
-                    </audio>
-                  )}
-                </Box>
-                <Flex
-                  justify={"space-between"}
-                  gap={"1rem"}
-                  align={["baseline", "baseline", "end", "end"]}
-                  flexDirection={["column", "column", "row", "row"]}
-                >
-                  <Flex gap={"1rem"}>
-                    <Flex>
-                      <Input
-                        onChange={changeHandler}
-                        accept="image/jpg, image/jpeg, image/png, image/gif"
-                        type="file"
-                        border={"none"}
-                        id="image"
-                        hidden
-                      />
-                      <Flex align={"end"} justify={"space-between"}>
-                        <label style={{ cursor: "pointer" }} htmlFor="image">
-                          <Flex
-                            color={"#B7B7B6"}
-                            align={"center"}
-                            gap={".2rem"}
-                          >
-                            <Icon as={FaImage} fontSize={".7rem"} />
-                            <Text fontSize={".8rem"}>Photo</Text>
-                          </Flex>
-                        </label>
-                      </Flex>
-                    </Flex>
-                    <Flex>
-                      <Input
-                        onChange={changeHandler}
-                        accept="video/mp4, video/avi, video/mov"
-                        type="file"
-                        border={"none"}
-                        id="video"
-                        hidden
-                      />
-                      <Flex align={"end"} justify={"space-between"}>
-                        <label style={{ cursor: "pointer" }} htmlFor="video">
-                          <Flex
-                            color={"#B7B7B6"}
-                            align={"center"}
-                            gap={".2rem"}
-                          >
-                            <Icon as={RiFileVideoFill} fontSize={".8rem"} />
-                            <Text fontSize={".8rem"}>Video</Text>
-                          </Flex>
-                        </label>
-                      </Flex>
-                    </Flex>
-                    <Flex>
-                      <Input
-                        onChange={changeHandler}
-                        accept="audio/mp3, audio/wav, audio/ogg"
-                        type="file"
-                        border={"none"}
-                        id="audio"
-                        hidden
-                      />
-                      <Flex align={"end"} justify={"space-between"}>
-                        <label style={{ cursor: "pointer" }} htmlFor="audio">
-                          <Flex
-                            color={"#B7B7B6"}
-                            align={"center"}
-                            gap={".2rem"}
-                          >
-                            <Icon as={FaMusic} fontSize={".7rem"} />
-                            <Text fontSize={".8rem"}>Audio</Text>
-                          </Flex>
-                        </label>
-                      </Flex>
-                    </Flex>
-                  </Flex>
-                  <Button
-                    bgGradient="linear(to-r, #fff, #fff)"
-                    border={"none"}
-                    transition={"all .5s ease-in-out"}
-                    w={["100%", "100%", "150px", "150px"]}
-                    _hover={{
-                      bgGradient: "linear(to-r, #3A8DFF, #3A8DFF)",
-                      border: "none",
-                    }}
-                    _focus={{ outline: "none" }}
-                    onClick={() => {
-                      handleCreateExclusiveContent();
-                    }}
-                  >
-                    <Text>Upload</Text>
-                  </Button>
-                </Flex>
-              </Box>
-            ) : (
-              <Box
-                boxShadow={"0 0 0 1px #2f2f30"}
-                py={"1rem"}
-                px={".8rem"}
-                borderRadius={".8rem"}
-                transition={"all 1s"}
-              >
-                <Textarea
-                  placeholder="About Content"
-                  value={title}
-                  resize={"none"}
-                  border={"none"}
-                  _focus={{ boxShadow: "none" }}
-                  _placeholder={{ color: "#B7B7B6", fontSize: ".9rem" }}
-                  p={"0"}
-                  mb={"0.5rem"}
-                  onChange={handleCaption}
-                />
-                <Box mb={"1rem"}>
-                  {(contentType === "mp4" ||
-                    contentType === "avi" ||
-                    contentType === "mov") && (
-                    <video width={"500"} controls>
-                      <source
-                        src={`https://${
-                          import.meta.env.VITE_GATEWAY_URL
-                        }/ipfs/${ipfsHash}`}
-                      />
-                    </video>
-                  )}
-                  {(contentType === "jpeg" ||
-                    contentType === "jpg" ||
-                    contentType === "png" ||
-                    contentType === "gif") && (
-                    <Img
-                      src={`https://${
-                        import.meta.env.VITE_GATEWAY_URL
-                      }/ipfs/${ipfsHash}`}
-                      alt="image"
-                      w={"300px"}
-                      h={"300px"}
-                      objectFit={"cover"}
-                      borderRadius={".5rem"}
-                    />
-                  )}
+      {(contentType === "mp3" ||
+        contentType === "wav" ||
+        contentType === "ogg") && (
+        <audio controls>
+          <source
+            src={`https://${import.meta.env.VITE_GATEWAY_URL}/ipfs/${ipfsHash}`}
+          />
+          Your browser does not support the audio element.
+        </audio>
+      )}
+    </Box>
+    <Flex
+      justify={"space-between"}
+      gap={"1rem"}
+      align={["baseline", "baseline", "end", "end"]}
+      flexDirection={["column", "column", "row", "row"]}
+    >
+      <Flex gap={"1rem"}>
+        <Flex>
+          <Input
+            onChange={changeHandler}
+            accept="image/jpg, image/jpeg, image/png, image/gif"
+            type="file"
+            border={"none"}
+            id="image"
+            hidden
+          />
+          <Flex align={"end"} justify={"space-between"}>
+            <label style={{ cursor: "pointer" }} htmlFor="image">
+              <Flex color={"#B7B7B6"} align={"center"} gap={".2rem"}>
+                <Icon as={FaImage} fontSize={".7rem"} />
+                <Text fontSize={".8rem"}>Photo</Text>
+              </Flex>
+            </label>
+          </Flex>
+        </Flex>
+        <Flex>
+          <Input
+            onChange={changeHandler}
+            accept="video/mp4, video/avi, video/mov"
+            type="file"
+            border={"none"}
+            id="video"
+            hidden
+          />
+          <Flex align={"end"} justify={"space-between"}>
+            <label style={{ cursor: "pointer" }} htmlFor="video">
+              <Flex color={"#B7B7B6"} align={"center"} gap={".2rem"}>
+                <Icon as={RiFileVideoFill} fontSize={".8rem"} />
+                <Text fontSize={".8rem"}>Video</Text>
+              </Flex>
+            </label>
+          </Flex>
+        </Flex>
+        <Flex>
+          <Input
+            onChange={changeHandler}
+            accept="audio/mp3, audio/wav, audio/ogg"
+            type="file"
+            border={"none"}
+            id="audio"
+            hidden
+          />
+          <Flex align={"end"} justify={"space-between"}>
+            <label style={{ cursor: "pointer" }} htmlFor="audio">
+              <Flex color={"#B7B7B6"} align={"center"} gap={".2rem"}>
+                <Icon as={FaMusic} fontSize={".7rem"} />
+                <Text fontSize={".8rem"}>Audio</Text>
+              </Flex>
+            </label>
+          </Flex>
+        </Flex>
+      </Flex>
+      <Button
+        bgGradient="linear(to-r, #fff, #fff)"
+        border={"none"}
+        transition={"all .5s ease-in-out"}
+        w={["100%", "100%", "150px", "150px"]}
+        _hover={{
+          bgGradient: "linear(to-r, #3A8DFF, #3A8DFF)",
+          border: "none",
+        }}
+        _focus={{ outline: "none" }}
+        onClick={() => {
+          handleCreateFreeContent();
+        }}
+      >
+        <Text>Upload</Text>
+      </Button>
+    </Flex>
+  </Box>
+</ModalBody>
 
-                  {(contentType === "mp3" ||
-                    contentType === "wav" ||
-                    contentType === "ogg") && (
-                    <audio controls>
-                      <source
-                        src={`https://${
-                          import.meta.env.VITE_GATEWAY_URL
-                        }/ipfs/${ipfsHash}`}
-                      />
-                      Your browser does not support the audio element.
-                    </audio>
-                  )}
-                </Box>
-                <Flex
-                  justify={"space-between"}
-                  gap={"1rem"}
-                  align={["baseline", "baseline", "end", "end"]}
-                  flexDirection={["column", "column", "row", "row"]}
-                >
-                  <Flex gap={"1rem"}>
-                    <Flex>
-                      <Input
-                        onChange={changeHandler}
-                        accept="image/jpg, image/jpeg, image/png, image/gif"
-                        type="file"
-                        border={"none"}
-                        id="image"
-                        hidden
-                      />
-                      <Flex align={"end"} justify={"space-between"}>
-                        <label style={{ cursor: "pointer" }} htmlFor="image">
-                          <Flex
-                            color={"#B7B7B6"}
-                            align={"center"}
-                            gap={".2rem"}
-                          >
-                            <Icon as={FaImage} fontSize={".7rem"} />
-                            <Text fontSize={".8rem"}>Photo</Text>
-                          </Flex>
-                        </label>
-                      </Flex>
-                    </Flex>
-                    <Flex>
-                      <Input
-                        onChange={changeHandler}
-                        accept="video/mp4, video/avi, video/mov"
-                        type="file"
-                        border={"none"}
-                        id="video"
-                        hidden
-                      />
-                      <Flex align={"end"} justify={"space-between"}>
-                        <label style={{ cursor: "pointer" }} htmlFor="video">
-                          <Flex
-                            color={"#B7B7B6"}
-                            align={"center"}
-                            gap={".2rem"}
-                          >
-                            <Icon as={RiFileVideoFill} fontSize={".8rem"} />
-                            <Text fontSize={".8rem"}>Video</Text>
-                          </Flex>
-                        </label>
-                      </Flex>
-                    </Flex>
-                    <Flex>
-                      <Input
-                        onChange={changeHandler}
-                        accept="audio/mp3, audio/wav, audio/ogg"
-                        type="file"
-                        border={"none"}
-                        id="audio"
-                        hidden
-                      />
-                      <Flex align={"end"} justify={"space-between"}>
-                        <label style={{ cursor: "pointer" }} htmlFor="audio">
-                          <Flex
-                            color={"#B7B7B6"}
-                            align={"center"}
-                            gap={".2rem"}
-                          >
-                            <Icon as={FaMusic} fontSize={".7rem"} />
-                            <Text fontSize={".8rem"}>Audio</Text>
-                          </Flex>
-                        </label>
-                      </Flex>
-                    </Flex>
-                  </Flex>
-                  <Button
-                    bgGradient="linear(to-r, #fff, #fff)"
-                    border={"none"}
-                    transition={"all .5s ease-in-out"}
-                    w={["100%", "100%", "150px", "150px"]}
-                    _hover={{
-                      bgGradient: "linear(to-r, #3A8DFF, #3A8DFF)",
-                      border: "none",
-                    }}
-                    _focus={{ outline: "none" }}
-                    onClick={() => {
-                      handleCreateFreeContent();
-                    }}
-                  >
-                    <Text>Upload</Text>
-                  </Button>
-                </Flex>
-              </Box>
-            )
-          </ModalBody>
         </ModalContent>
       </Modal>
     </Box>

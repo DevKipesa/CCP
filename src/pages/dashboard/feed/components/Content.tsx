@@ -21,23 +21,10 @@ import { useEffect, useState } from "react";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { ContentItem } from "../../../../hooks/types";
-// interface ContentItem {
-//   title: string;
-//   description: string;
-//   creatorProfile: string;
-//   creatorImage: string;
-//   dateCreated: string;
-//   contentType: "image" | "video" | "audio";
-//   ipfsHash: string;
-//   likes: number;
-//   dislikes: number;
-//   item: string;
-//   id?: number; // Adjusted to match its use elsewhere
-// }
 
 interface ContentProps {
-  handleFullContent: (item: ContentItem) => void; // Ensure this matches
-  id: ContentItem | undefined; // Ensure this matches
+  handleFullContent: (item: ContentItem) => void;
+  id: ContentItem | undefined;
   item: ContentItem;
   handleLike: (id: number) => void;
   handleDisLike: (id: number) => void;
@@ -172,6 +159,7 @@ const Content: React.FC<ContentProps> = ({
             onOpen();
             handleFullContent(item);
           }}
+          cursor={"pointer"}
         >
           <Text mb={".5rem"}>{item.title}</Text>
           {item.contentType === "image" && (
@@ -230,38 +218,66 @@ const Content: React.FC<ContentProps> = ({
         </Flex>
 
         {/* Modal for Full Content */}
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered>
           <ModalOverlay />
-          <ModalContent>
+          <ModalContent bg="#222" borderRadius={"1rem"}>
             <ModalBody>
-              <Text fontSize={"lg"}>{item.title}</Text>
-              <Text>{item.description}</Text>
+              <Text fontSize={"2xl"} mb={"1rem"}>{item.title}</Text>
+              <Text mb={"1rem"}>{item.description}</Text>
+              {item.contentType === "image" && (
+                <Img
+                  src={item.ipfsHash}
+                  alt="Full Content Image"
+                  w={"100%"}
+                  h={"auto"}
+                  objectFit={"cover"}
+                  borderRadius={".5rem"}
+                />
+              )}
+              {item.contentType === "video" && (
+                <video src={item.ipfsHash} width="100%" controls />
+              )}
+              {item.contentType === "audio" && (
+                <audio src={item.ipfsHash} controls />
+              )}
+              <Button
+                mt={"1rem"}
+                borderRadius={"50rem"}
+                bgGradient="linear(to-l, #3A8DFF, #30c0d9)"
+                variant={"solid"}
+                width={"100%"}
+                onClick={() => setIsMintModalOpen(true)}
+              >
+                Mint
+              </Button>
             </ModalBody>
           </ModalContent>
         </Modal>
 
-        {/* Minting Modal */}
-        <Modal isOpen={isMintModalOpen} onClose={() => setIsMintModalOpen(false)}>
+        {/* Mint Modal */}
+        <Modal isOpen={isMintModalOpen} onClose={() => setIsMintModalOpen(false)} size="md" isCentered>
           <ModalOverlay />
-          <ModalContent bg="#222">
+          <ModalContent bg="#222" borderRadius={"1rem"}>
             <ModalBody>
-              <Text fontSize={"lg"}>Mint this content</Text>
+              <Text fontSize={"xl"} mb={"1rem"}>Mint Your Content</Text>
               <Input
+                type="number"
                 placeholder="0.000402 ETH"
                 value={ethAmount}
                 onChange={(e) => setEthAmount(e.target.value)}
-                mb={4}
+                mb={"1rem"}
+                borderRadius={"1rem"}
+                _focus={{ borderColor: "#3A8DFF" }}
               />
               <Button
-            bg="#3A8DFF" // Set the background color
-           color="white" // Set the text color
-            _hover={{ bg: "#30c0d9" }} // Change the background color on hover
-            onClick={handleMint}
-            disabled={!ethAmount}
-             >
-             Confirm Mint
+                onClick={handleMint}
+                borderRadius={"50rem"}
+                bgGradient="linear(to-l, #3A8DFF, #30c0d9)"
+                variant={"solid"}
+                width={"100%"}
+              >
+                Mint
               </Button>
-
             </ModalBody>
           </ModalContent>
         </Modal>

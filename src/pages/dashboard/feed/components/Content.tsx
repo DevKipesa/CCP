@@ -39,7 +39,7 @@ const Content: React.FC<ContentProps> = ({
   handleDelete,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [timestamp, setTimestamp] = useState(item.dateCreated);
+  const [timestamp] = useState(item.dateCreated);
   const [timeAgo, setTimeAgo] = useState<string | null>(null);
   const [isMintModalOpen, setIsMintModalOpen] = useState(false);
   const [ethAmount, setEthAmount] = useState("");
@@ -57,38 +57,23 @@ const Content: React.FC<ContentProps> = ({
       const month = 30 * day;
       const year = 365 * day;
 
-      if (elapsedTime < minute) {
-        return "Just now";
-      } else if (elapsedTime < hour) {
-        const minutes = Math.floor(elapsedTime / minute);
-        return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
-      } else if (elapsedTime < day) {
-        const hours = Math.floor(elapsedTime / hour);
-        return `${hours} hour${hours > 1 ? "s" : ""} ago`;
-      } else if (elapsedTime < week) {
-        const days = Math.floor(elapsedTime / day);
-        return `${days} day${days > 1 ? "s" : ""} ago`;
-      } else if (elapsedTime < month) {
-        const weeks = Math.floor(elapsedTime / week);
-        return `${weeks} week${weeks > 1 ? "s" : ""} ago`;
-      } else if (elapsedTime < year) {
-        const months = Math.floor(elapsedTime / month);
-        return `${months} month${months > 1 ? "s" : ""} ago`;
-      } else {
-        const years = Math.floor(elapsedTime / year);
-        return `${years} year${years > 1 ? "s" : ""} ago`;
-      }
+      if (elapsedTime < minute) return "Just now";
+      if (elapsedTime < hour) return `${Math.floor(elapsedTime / minute)} mins ago`;
+      if (elapsedTime < day) return `${Math.floor(elapsedTime / hour)} hours ago`;
+      if (elapsedTime < week) return `${Math.floor(elapsedTime / day)} days ago`;
+      if (elapsedTime < month) return `${Math.floor(elapsedTime / week)} weeks ago`;
+      if (elapsedTime < year) return `${Math.floor(elapsedTime / month)} months ago`;
+      return `${Math.floor(elapsedTime / year)} years ago`;
     };
 
     setTimeAgo(getTimeAgo(elapsedTime));
-    setTimestamp((prevTime: number) => prevTime);
   }, [timestamp]);
 
   const handleMint = () => {
     if (ethAmount) {
       console.log(`Minting content with id: ${item.id}, ETH amount: ${ethAmount}`);
       setIsMinted(true);
-      setIsMintModalOpen(false); // Automatically close the modal
+      setIsMintModalOpen(false); // Close modal after minting
     }
   };
 
@@ -96,142 +81,117 @@ const Content: React.FC<ContentProps> = ({
     !isMinted && (
       <GridItem
         w={"100%"}
-        bg={"#1a202c"} // Changed card background color to Chakra's "gray.900" shade
-        p={".7rem"}
-        borderRadius={".5rem"}
-        boxShadow="0 5px 14px 0 rgba(0, 0, 0, 0.1)"
+        bg={"#2C2F33"}
+        p={"1rem"}
+        borderRadius={"0.8rem"}
+        boxShadow="0 8px 20px rgba(0, 0, 0, 0.15)"
+        _hover={{ transform: "translateY(-5px)", transition: "all 0.3s ease" }}
       >
-        <Flex align={"center"} justify={"space-between"}>
-          <Flex align={"center"} gap={".5rem"} mb={"1rem"}>
+        {/* Creator Info */}
+        <Flex align={"center"} justify={"space-between"} mb={"1rem"}>
+          <Flex align={"center"} gap={"0.75rem"}>
             <Img
               src={item.creatorImage}
-              w={["40px", "40px", "50px", "50px"]}
-              h={["40px", "40px", "50px", "50px"]}
+              w={["40px", "50px"]}
+              h={["40px", "50px"]}
               objectFit={"cover"}
-              borderRadius={"100%"}
-              alt="Creator Profile"
+              borderRadius={"full"}
+              alt="Creator"
             />
-            <Flex align={"end"} gap={".4rem"}>
-              <Box>
-                <Text>{item.creatorProfile}</Text>
-              </Box>
-              <Text color={"#3A8DFF"}>. {timeAgo}</Text>
-            </Flex>
+            <Box>
+              <Text fontWeight={"bold"} color="#E5E5E5">{item.creatorProfile}</Text>
+              <Text fontSize={"0.9rem"} color={"#50FA7B"}>
+                {timeAgo}
+              </Text>
+            </Box>
           </Flex>
+
+          {/* Options Menu */}
           <Menu>
-            {({ isOpen }) => (
-              <>
-                <MenuButton
-                  minWidth={"0"}
-                  bg={"none"}
-                  aria-label={"More"}
-                  px={"0"}
-                  border={"none"}
-                  _hover={{ background: "none", border: "none" }}
-                  _focus={{ outline: "none" }}
-                  _active={{ background: "none" }}
-                  isActive={isOpen}
-                  as={Button}
-                >
-                  <Icon
-                    as={HiDotsHorizontal}
-                    color={"#fff"}
-                    fontSize={"1.3rem"}
-                  />
-                </MenuButton>
-                <MenuList bg={"#13111a"} border={"none"}>
-                  <MenuItem
-                    bg={"#13111a"}
-                    _hover={{ background: "none" }}
-                    _focus={{ background: "none", outline: "none" }}
-                    onClick={() => handleDelete(Number(item.id))}
-                  >
-                    Delete
-                  </MenuItem>
-                </MenuList>
-              </>
-            )}
+            <MenuButton as={Button} bg="none" _hover={{ bg: "none" }}>
+              <Icon as={HiDotsHorizontal} color={"#50FA7B"} fontSize={"1.3rem"} />
+            </MenuButton>
+            <MenuList bg={"#44475A"} border={"none"}>
+              <MenuItem
+                onClick={() => handleDelete(Number(item.id))}
+                _hover={{ bg: "gray.600" }}
+              >
+                Delete
+              </MenuItem>
+            </MenuList>
           </Menu>
         </Flex>
+
+        {/* Content Section */}
         <Box
-          mb={"1rem"}
           onClick={() => {
             onOpen();
             handleFullContent(item);
           }}
           cursor={"pointer"}
         >
-          <Text mb={".5rem"}>{item.title}</Text>
+          <Text mb={".5rem"} fontWeight={"bold"} color="#E5E5E5">{item.title}</Text>
           {item.contentType === "image" && (
             <Img
-              mb={"1rem"}
               src={item.ipfsHash}
-              alt="Content Image"
-              h={"200px"}
+              alt="Content"
               w={"100%"}
+              h={"220px"}
               objectFit={"cover"}
-              cursor={"pointer"}
-              borderRadius={".5rem"}
+              borderRadius={"0.8rem"}
+              mb={"1rem"}
+              boxShadow="0 4px 8px rgba(0, 0, 0, 0.2)"
             />
           )}
           {item.contentType === "video" && (
-            <video src={item.ipfsHash} width="100%" height="100" controls />
+            <video src={item.ipfsHash} width="100%" controls style={{ borderRadius: "0.8rem", marginBottom: "1rem" }} />
           )}
           {item.contentType === "audio" && (
-            <audio src={item.ipfsHash} controls />
+            <audio src={item.ipfsHash} controls style={{ width: "100%" }} />
           )}
         </Box>
-        <Flex justify={"space-between"}>
-          <Box>
-            <Flex gap={"1.5rem"} align={"center"}>
-              <Flex
-                gap={".2rem"}
-                onClick={() => handleLike(Number(item.id))}
-                cursor={"pointer"}
-                align={"center"}
-              >
-                <Icon as={FaThumbsUp} fontSize={"1rem"} />
-                <Text>{Number(item.likes)}</Text>
-              </Flex>
-              <Flex
-                gap={".2rem"}
-                onClick={() => handleDisLike(Number(item.id))}
-                cursor={"pointer"}
-                align={"center"}
-              >
-                <Icon as={FaThumbsDown} fontSize={"1rem"} />
-                <Text>{Number(item.dislikes)}</Text>
-              </Flex>
+
+        {/* Likes, Dislikes, and Mint Button */}
+        <Flex justify={"space-between"} align={"center"}>
+          <Flex gap={"1rem"}>
+            <Flex gap={"0.5rem"} align={"center"} cursor={"pointer"} onClick={() => handleLike(Number(item.id))}>
+              <Icon as={FaThumbsUp} fontSize={"1.2rem"} color="white" />
+              <Text color="white">{Number(item.likes)}</Text>
             </Flex>
-          </Box>
+            <Flex gap={"0.5rem"} align={"center"} cursor={"pointer"} onClick={() => handleDisLike(Number(item.id))}>
+              <Icon as={FaThumbsDown} fontSize={"1.2rem"} color="white" />
+              <Text color="white">{Number(item.dislikes)}</Text>
+            </Flex>
+          </Flex>
           <Button
-            borderRadius={"50rem"}
-            px={"1rem"}
-            bgGradient="linear(to-l, #3A8DFF, #30c0d9)"
+            borderRadius={"full"}
+            bgGradient="linear(to-r, #8A2BE2, #4BC0C8)"
             color={"white"}
-            variant={"solid"}
+            _hover={{ bgGradient: "linear(to-r, #4BC0C8, #8A2BE2)" }}
             onClick={() => setIsMintModalOpen(true)}
-            _hover={{ background: "none" }}
+            fontSize="0.9rem"
+            px="1.5rem"
+            py="0.5rem"
           >
             Mint
           </Button>
         </Flex>
 
-        {/* Modal for Full Content */}
+        {/* Full Content Modal */}
         <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered>
           <ModalOverlay />
-          <ModalContent bg="#222" borderRadius={"1rem"}>
+          <ModalContent bg="#282A36" borderRadius={"1rem"}>
             <ModalBody>
-              <Text fontSize={"2xl"} mb={"1rem"}>{item.title}</Text>
-              <Text mb={"1rem"}>{item.description}</Text>
+              <Text fontSize={"2xl"} mb={"1rem"} color="#50FA7B">{item.title}</Text>
+              <Text mb={"1rem"} color="#E5E5E5">{item.description}</Text>
               {item.contentType === "image" && (
                 <Img
                   src={item.ipfsHash}
-                  alt="Full Content Image"
+                  alt="Full Content"
                   w={"100%"}
                   h={"auto"}
                   objectFit={"cover"}
-                  borderRadius={".5rem"}
+                  borderRadius={".8rem"}
                 />
               )}
               {item.contentType === "video" && (
@@ -240,16 +200,6 @@ const Content: React.FC<ContentProps> = ({
               {item.contentType === "audio" && (
                 <audio src={item.ipfsHash} controls />
               )}
-              <Button
-                mt={"1rem"}
-                borderRadius={"50rem"}
-                bgGradient="linear(to-l, #3A8DFF, #30c0d9)"
-                variant={"solid"}
-                width={"100%"}
-                onClick={() => setIsMintModalOpen(true)}
-              >
-                Mint
-              </Button>
             </ModalBody>
           </ModalContent>
         </Modal>
@@ -257,9 +207,9 @@ const Content: React.FC<ContentProps> = ({
         {/* Mint Modal */}
         <Modal isOpen={isMintModalOpen} onClose={() => setIsMintModalOpen(false)} size="md" isCentered>
           <ModalOverlay />
-          <ModalContent bg="#222" borderRadius={"1rem"}>
+          <ModalContent bg="#282A36" borderRadius={"1rem"}>
             <ModalBody>
-              <Text fontSize={"xl"} mb={"1rem"}>Mint Your Content</Text>
+              <Text fontSize={"xl"} mb={"1rem"} color="#50FA7B">Mint Your Content</Text>
               <Input
                 type="number"
                 placeholder="0.000402 ETH"
@@ -267,14 +217,17 @@ const Content: React.FC<ContentProps> = ({
                 onChange={(e) => setEthAmount(e.target.value)}
                 mb={"1rem"}
                 borderRadius={"1rem"}
-                _focus={{ borderColor: "#3A8DFF" }}
+                _focus={{ borderColor: "#8A2BE2" }}
+                color="white"
+                bg="#44475A"
               />
               <Button
                 onClick={handleMint}
-                borderRadius={"50rem"}
-                bgGradient="linear(to-l, #3A8DFF, #30c0d9)"
+                borderRadius={"full"}
+                bgGradient="linear(to-r, #8A2BE2, #4BC0C8)"
                 variant={"solid"}
                 width={"100%"}
+                _hover={{ opacity: "0.85" }}
               >
                 Mint
               </Button>

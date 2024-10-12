@@ -20,25 +20,53 @@
   padding: 0.3rem 0.7rem;
 }
 
+/* Base style for inactive links */
 .activeClassName {
-  transition: all 0.5s ease-in-out;
-  color: #979797 !important;
+  transition: all 0.3s ease-in-out;
+  /* Faster, smoother transition */
+  color: #a3a3a3 !important;
+  /* Light gray color for inactive state */
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  background-color: transparent;
+  /* No background for inactive state */
 }
 
+/* Active state button */
 .active {
-  background-color: #13111a;
-  box-shadow: 0px 0px 0px 1px #3A8DFF;
+  background-color: #1a1a2e;
+  /* Darker background for active state */
+  /* box-shadow: 0 0 0 2px #3a8dff; */
+  /* Blue outline for active state */
   border-radius: 0.5rem;
   color: white !important;
+  /* White text for contrast */
+  font-weight: bold;
+  /* Bold font for active state */
 }
 
+/* Hover state for inactive links */
 .activeClassName:hover {
   color: white !important;
-  background-color: #13111a;
-  box-shadow: 0px 0px 0px 1px #3A8DFF;
+  /* White text on hover */
+  background-color: #000000;
   border-radius: 0.5rem;
+  /* Smooth rounded corners */
+  transform: translateY(-2px);
+  /* Subtle lift effect on hover */
 }
 
+/* Active button hover effect */
+.active:hover {
+  background-color: #1a1a2e;
+  /* Consistent background for active */
+  box-shadow: 0 0 0 2px #3a8dff, 0 6px 12px rgba(58, 141, 255, 0.2);
+  /* Soft shadow for depth */
+  transform: translateY(-2px);
+  /* Slight lift to show interaction */
+}
 a {
   font-weight: 500;
   color: #646cff;

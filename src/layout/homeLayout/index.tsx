@@ -44,7 +44,7 @@ export default function HomeLayout(props: any) {
           bgGradient="linear(to-r, #fff, #fff)"
           bgClip={"text"}
         >
-          CCP Platform
+          CC Platform
         </Text>
         <Flex gap={"2rem"} display={["none", "none", "flex"]}>
           <NavLink className={"activeClassName c_p"} to={"/"}>
@@ -53,9 +53,6 @@ export default function HomeLayout(props: any) {
           <NavLink className={"activeClassName c_p"} to={"/about-us"}>
             About Us
           </NavLink>
-          {/* <NavLink className={"activeClassName c_p"} to={"/faq"}>
-            FAQ
-          </NavLink> */}
           <NavLink className={"activeClassName c_p"} to={"/support"}>
             Support
           </NavLink>
@@ -90,9 +87,6 @@ export default function HomeLayout(props: any) {
                 </NavLink>
                 <NavLink className={"activeClassName c_p"} to={"/about-us"}>
                   About Us
-                </NavLink>
-                <NavLink className={"activeClassName c_p"} to={"/faq"}>
-                  FAQ
                 </NavLink>
                 <NavLink className={"activeClassName c_p"} to={"/support"}>
                   Support

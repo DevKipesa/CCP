@@ -2,34 +2,6 @@ import { createWeb3Modal, defaultConfig } from "@web3modal/ethers/react";
 
 export const Base_SEPOLIA_ID = 84532;
 
-// export const Lisk_SEPOLIA_ID = 4202;
-// export const OPTIMISM_SEPOLIA_ID = 11155420;
-// export const OPTIMISM_ID = 10;
-
-// const OP_mainnet = {
-//   chainId: OPTIMISM_ID,
-//   name: "Optimism",
-//   currency: "ETH",
-//   explorerUrl: "https://explorer.optimism.io",
-//   rpcUrl: import.meta.env.VITE_mainnet_rpc_url,
-// };
-
-// const OP_sepolia = {
-//   chainId: OPTIMISM_SEPOLIA_ID,
-//   name: "Optimism Sepolia",
-//   currency: "ETH",
-//   explorerUrl: "https://sepolia-optimistic.etherscan.io",
-//   rpcUrl: import.meta.env.VITE_sepolia_rpc_url,
-// };
-
-// const Lisk_sepolia = {
-//   chainId: Base_SEPOLIA_ID,
-//   name: "Lisk Sepolia Testnet",
-//   currency: "ETH",
-//   explorerUrl: "https://blockscout.lisk.com/",
-//   rpcUrl: import.meta.env.VITE_sepolia_rpc_url,
-// };
-
 const Base_sepolia = {
   chainId: Base_SEPOLIA_ID,
   name: "Base Sepolia Testnet",

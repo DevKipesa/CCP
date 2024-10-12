@@ -1,9 +1,7 @@
-import { MdFeed } from "react-icons/md";
-import { SiGoogleanalytics } from "react-icons/si";
-import { FaMoneyBillTrendUp } from "react-icons/fa6";
-import { CgProfile } from "react-icons/cg";
 import { GrMail } from "react-icons/gr";
 import { IoLogoWhatsapp } from "react-icons/io";
+import { MdFeed } from "react-icons/md";
+import { SiGoogleanalytics } from "react-icons/si";
 
 export const menu = [
   {
@@ -12,39 +10,12 @@ export const menu = [
     icon: MdFeed,
   },
   {
-    link: "/analytics",
+    link: "#",
     title: "Analytics",
     icon: SiGoogleanalytics,
   },
-  // {
-  //   link: "/subscription",
-  //   title: "Subscription",
-  //   icon: FaMoneyBillTrendUp,
-  // },
 ];
 
-export const menuDAO = [
-  {
-    link: "/overview",
-    title: "Overview",
-    icon: MdFeed,
-  },
-  {
-    link: "/proposals",
-    title: "Proposals",
-    icon: SiGoogleanalytics,
-  },
-  {
-    link: "/treasury",
-    title: "Treasury",
-    icon: FaMoneyBillTrendUp,
-  },
-  {
-    link: "/voting",
-    title: "Voting",
-    icon: CgProfile,
-  },
-];
 
 export const content = [
   {

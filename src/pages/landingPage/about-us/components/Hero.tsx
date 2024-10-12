@@ -19,10 +19,10 @@ const Hero = () => {
           mb="40px"
           color={"#e9ecef"}
         >
-          About CCP
+          About CC platform
         </Heading>
         <Text color={"#b7b5c8"}>
-          Welcome to CCP, the premier destination for content creators and
+          Welcome to CCPlatform, the premier destination for content creators and
           enthusiasts in the decentralized space. At CCP, we believe in
           empowering creators to take control of their content, connect with
           their audience, and monetize their creativity like never before.

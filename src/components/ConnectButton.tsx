@@ -11,16 +11,10 @@ export default function ConnectButton() {
         <w3m-button size="sm" />
       ) : (
         <Button
-          // bgGradient="linear(to-r, #e94c91, #5555fb)"
-          borderRadius={"100rem"}
-          border={"none"}
-          // color={"#fff"}
-          transition={"all .5s ease-in-out"}
-          w={"150px"}
-          _hover={{
-            bgGradient: "linear(to-r, #3A8DFF, #5567FB)",
-            border: "none",
-          }}
+            size="lg"
+            mt={4}
+            _hover={{ transform: "scale(1.05)", boxShadow: "lg" }} // Added box shadow on hover
+            transition="all 0.3s ease"
           _focus={{ outline: "none" }}
           onClick={() => open()}
         >

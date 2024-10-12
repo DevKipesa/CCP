@@ -1,5 +1,6 @@
-import { Flex, Box, Text, Image, Heading, Button } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import "../../../../App.css";
+import ConnectButton from "../../../../components/ConnectButton";
 
 export default function Hero() {
   return (
@@ -15,6 +16,7 @@ export default function Hero() {
         justify={"space-between"}
         w={"100%"}
         position={"relative"}
+      // bgGradient="linear(to-r, #1d1a27, #2b2b3d)" // Added gradient background
       >
         {/* Text Block */}
         <Box w={["100%", "100%", "50%"]} zIndex={"1"}>
@@ -43,7 +45,7 @@ export default function Hero() {
             colorScheme="blue"
             size="lg"
             mt={4}
-            _hover={{ transform: "scale(1.05)" }}
+            _hover={{ transform: "scale(1.05)", boxShadow: "lg" }} // Added box shadow on hover
             transition="all 0.3s ease"
           >
             Get Started
@@ -57,7 +59,7 @@ export default function Hero() {
           overflow="hidden"
           borderRadius="lg"
           transition="transform 0.5s ease"
-          _hover={{ transform: "scale(1.03)" }}
+          _hover={{ transform: "scale(1.05)" }} // Slight increase on hover
         >
           <Image
             src="./images/hero_asset.png"
@@ -80,6 +82,7 @@ export default function Hero() {
         justify={"space-between"}
         w={"100%"}
         position={"relative"}
+      // bgGradient="linear(to-l, #2b2b3d, #1d1a27)" // Added gradient background
       >
         {/* Image Block */}
         <Box
@@ -88,7 +91,7 @@ export default function Hero() {
           overflow="hidden"
           borderRadius="lg"
           transition="transform 0.5s ease"
-          _hover={{ transform: "scale(1.03)" }}
+          _hover={{ transform: "scale(1.05)" }} // Slight increase on hover
         >
           <Image
             src="./images/why_asset.png"
@@ -103,7 +106,7 @@ export default function Hero() {
         <Box w={["100%", "100%", "50%"]}>
           <Heading
             className="font"
-            as="h1"
+            as="h2" // Changed to h2 for semantic HTML
             size={["2xl", "2xl", "3xl", "4xl"]}
             mb="24px"
             lineHeight={"1.2"}
@@ -121,15 +124,7 @@ export default function Hero() {
             Platform, start monetizing your content from day one. Get started
             now and grow your audience while earning.
           </Text>
-          <Button
-            colorScheme="pink"
-            size="lg"
-            mt={4}
-            _hover={{ transform: "scale(1.05)" }}
-            transition="all 0.3s ease"
-          >
-            Start Earning
-          </Button>
+          <ConnectButton />
         </Box>
 
         <Box
@@ -141,7 +136,7 @@ export default function Hero() {
           h={"300px"}
           zIndex={"-10"}
           filter={"blur(150px)"}
-        ></Box>
+        />
       </Flex>
     </>
   );

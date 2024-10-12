@@ -28,22 +28,24 @@ const Card: React.FC<CardProps> = ({ image }) => {
   return (
     <Box
       borderWidth="2px"
+      borderColor="transparent" // Changed to transparent for a smoother effect
       borderRadius="xl"
       overflow="hidden"
-      w="220px"
+      w={["100%", "100%", "220px"]} // Responsive width
       minH="300px"
       position="relative"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
         transform: `rotateX(${tilt.tiltY}deg) rotateY(${tilt.tiltX}deg)`,
-        transition: "transform 0.2s ease, scale 0.2s ease",
+        transition: "transform 0.2s ease, box-shadow 0.2s ease", // Changed scale transition to box-shadow for smoother interaction
       }}
       _hover={{
+        boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)", // Added shadow on hover
         transform: `scale(1.05) rotateX(${tilt.tiltY}deg) rotateY(${tilt.tiltX}deg)`,
       }}
     >
-      <Image src={image} alt="" objectFit="cover" w="100%" h="100%" />
+      <Image src={image} alt="Content" objectFit="cover" w="100%" h="100%" />
     </Box>
   );
 };
@@ -72,6 +74,7 @@ const CardRow: React.FC = () => {
         h={"100px"}
         zIndex={"-10"}
         filter={"blur(50px)"}
+        bgGradient="linear(to-br, #e94c91, #5555fb)" // Added gradient for visual interest
       ></Box>
       <Box
         position={"absolute"}
@@ -81,6 +84,7 @@ const CardRow: React.FC = () => {
         h={"100px"}
         zIndex={"-10"}
         filter={"blur(50px)"}
+        bgGradient="linear(to-br, #e94c91, #5555fb)" // Added gradient for visual interest
       ></Box>
       <Heading
         className="font"
@@ -88,6 +92,8 @@ const CardRow: React.FC = () => {
         as="h1"
         size={["xl", "xl", "2xl", "2xl"]}
         noOfLines={2}
+        textAlign="center" // Centered the heading
+        color="#f8f8f8" // Changed color for better contrast
       >
         Most Viewed Content
       </Heading>
@@ -96,6 +102,9 @@ const CardRow: React.FC = () => {
         justifyContent="space-between"
         py="20px"
         gap={"1rem"}
+        w="100%" // Ensured the Flex container takes full width
+        maxW="1200px" // Added max width for better responsiveness
+        px={["1rem", "1rem", "0"]} // Padding for mobile view
       >
         <Card image={image1} />
         <Card image={image2} />

@@ -5,7 +5,7 @@ import "../../../../App.css";
 import useGetUserDetails from "../../../../hooks/useGetUserDetails.ts";
 
 const DashboardMenu = () => {
-    const { data: userDetails } = useGetUserDetails();
+    const { data: _userDetails } = useGetUserDetails();
     const { isConnected } = useWeb3ModalAccount();
     const navigate = useNavigate();
 

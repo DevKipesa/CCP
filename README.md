@@ -27,10 +27,8 @@ Start the server
   yarn run dev
 ```
 
-# There are the contract addresses.
+## There are the contract addresses.
 
-# # ONCHAIN EXECUTION COMPLETE & SUCCESSFUL.
-# ##
 # Start verification for (6) contracts
 # Start verifying contract `0x8Afc65fAC7941170982ceFB6937e3e5580a1AcC8` deployed on base-sepolia
 
